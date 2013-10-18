@@ -1,4 +1,5 @@
-﻿@{
+﻿@model string
+@{
     Layout = null;
 }
 
@@ -6,14 +7,23 @@
 
 <html>
 <head>
+    <link type="text/css" href="index.css" />
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
 </head>
-<body style="color:Green;">
-    <div style="vertical-align:middle; text-align:center">
+<body style="background-color:Green;">
+    <div class="vCenter" style="text-align:center;">
+    @using (Html.BeginForm("login", "Login"))
+    {
+        <br /><br /><br /><br /><br />
         <p>Username: <input id="userName"  /></p>
-        <p>Password: <input id="password"  /></p>
+        <p>Password: <input id="Password" type="password" /></p>
         <input id="logon" type="submit" value="submit" />
+        if(Model != null)
+        {
+            @Html.Raw(Model)
+        }
+    }
     </div>
 </body>
 </html>

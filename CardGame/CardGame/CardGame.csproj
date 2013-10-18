@@ -165,8 +165,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Content\Controllers\LoginController.cs" />
-    <Compile Include="Content\Controllers\SelectGameController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\SelectGameController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -177,6 +177,7 @@
     <Compile Include="Models\DealerPlayer.cs" />
     <Compile Include="Models\Deck.cs" />
     <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\login\login.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -252,6 +253,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Views\Login\index.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

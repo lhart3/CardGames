@@ -15,6 +15,9 @@ namespace CardGame.Controllers
         {
             return View();
         }
-
+        public ActionResult login(string username, string password)
+        {
+            return View("Index", (object) "Not valid");
+        }
     }
 }
