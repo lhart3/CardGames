@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CardGame.Models
+namespace CardGame.GameLogic
 {
     public abstract class Game
     {
-        public Player[] Players { get; private set; }
+        public IEnumerable<Player> Players { get; private set; }
         public Deck Deck { get; private set; }
 
         public Dealer Dealer { get; private set; }
@@ -20,5 +20,13 @@ namespace CardGame.Models
         }
 
         public abstract bool TryCheckForWinner(out Player winner);
+
+        public void AddPlayer(Player player)
+        {
+            var list = new List<Player>(Players);
+            list.Add(player);
+
+            Players = list;
+        }
     }
 }

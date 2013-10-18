@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CardGame.Models
+namespace CardGame.GameLogic
 {
     public class Blackjack : Game
     {
@@ -14,7 +14,7 @@ namespace CardGame.Models
 
         private int GetValue(Card card, bool aceAsOne)
         {
-            if (card.Number == 1)
+            if (card.Number == CardType.Ace)
             {
                 if (aceAsOne)
                     return 1;
@@ -22,10 +22,10 @@ namespace CardGame.Models
                     return 11;
             }
 
-            if (card.Number > 10)
+            if ((int)card.Number > 10)
                 return 10;
 
-            return card.Number;
+            return (int)card.Number;
         }
 
         public override bool TryCheckForWinner(out Player winner)
