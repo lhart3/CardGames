@@ -7,10 +7,12 @@ namespace CardGame.GameLogic
 {
     public class Deck
     {
-        private Queue<Card> Cards { get; set; }
+        protected Queue<Card> Cards { get; set; }
 
         public Deck()
         {
+            Cards = new Queue<Card>();
+
             Populate();
             Shuffle();
         }
@@ -43,11 +45,22 @@ namespace CardGame.GameLogic
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>The Next Card From the Deck; If there is no cards return null</returns>
         public Card Draw()
         {
-            var card = Cards.Dequeue();
+            if (Cards.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                var card = Cards.Dequeue();
 
-            return card;
+                return card;
+            }
         }
     }
 }

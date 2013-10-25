@@ -11,9 +11,10 @@ namespace CardGame.GameLogic
         public int Currency { get; set; }
         public List<Card> Hand { get; private set; }
 
+        public int RequestedCardCount { get; set; }
+
         protected Player()
         {
-
         }
 
         public Player(Guid id)

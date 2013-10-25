@@ -5,15 +5,14 @@ using System.Web;
 
 namespace CardGame.GameLogic
 {
-    public class BlackjackDealer : Dealer
+    public class BlackjackDealer : DealerForGameWithFixedStartingHandSize
     {
-        public override void Deal(Deck deck, int count, Player player)
+        public override void DealForCurrentRound(Deck deck, Player player)
         {
-            for (int i = 0; i < count; ++i)
-            {
-                var card = deck.Draw();
-                player.Hand.Add(card);
-            }
+            if (player.RequestedCardCount > 0)
+                player.Hand.Add(deck.Draw());
         }
+
+        public override int StartingHandSize { get { return 2; } }
     }
 }
