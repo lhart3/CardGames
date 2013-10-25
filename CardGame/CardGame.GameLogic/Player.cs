@@ -11,10 +11,20 @@ namespace CardGame.GameLogic
         public int Currency { get; set; }
         public List<Card> Hand { get; private set; }
 
+        protected Player()
+        {
+
+        }
+
         public Player(Guid id)
         {
             Id = id;
             Hand = new List<Card>();
+        }
+
+        public bool Equals(Player other)
+        {
+            throw new NotImplementedException();
         }
     }
 }

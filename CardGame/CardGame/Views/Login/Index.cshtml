@@ -12,10 +12,9 @@
     <title>Login</title>
 </head>
 <body style="background-color:Green;">
-    <div class="vCenter" style="text-align:center;">
+    <div class="vCenter" id="vCenter">
     @using (Html.BeginForm("login", "Login"))
     {
-        <br /><br /><br /><br /><br />
         <p>Username: <input id="userName"  /></p>
         <p>Password: <input id="Password" type="password" /></p>
         <input id="logon" type="submit" value="submit" />

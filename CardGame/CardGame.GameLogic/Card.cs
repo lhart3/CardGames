@@ -34,12 +34,12 @@ namespace CardGame.GameLogic
         public Card(Suit suit, int number)
         {
             Suit = suit;
-            Number = number;
+            Number = (CardType)number;
         }
 
         public Card(int number)
         {
-            Number = number;
+            Number = (CardType)number;
         }
     }
 }
