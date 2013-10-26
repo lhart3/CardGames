@@ -11,6 +11,7 @@ namespace CardGame.GameLogic
         public Deck Deck { get; private set; }
 
         public Dealer Dealer { get; private set; }
+        public int currentRound;
 
         public Game(Player[] players, Deck deck, Dealer dealer)
         {
@@ -28,5 +29,6 @@ namespace CardGame.GameLogic
 
             Players = list;
         }
+        public abstract int CurrentRound();
     }
 }

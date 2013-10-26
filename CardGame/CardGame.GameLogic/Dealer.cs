@@ -5,7 +5,7 @@ using System.Web;
 
 namespace CardGame.GameLogic
 {
-    public abstract class Dealer
+    public abstract class Dealer : Game
     {
         public abstract void DealStartingHand(Deck deck, Player player);
 
@@ -19,8 +19,11 @@ namespace CardGame.GameLogic
         {
             for (int i = 0; i < StartingHandSize; i++)
             {
-                var card = deck.Draw();
-                player.Hand.Add(card);
+                foreach (Player x in Players)
+                {
+                    var card = deck.Draw();
+                    player.Hand.Add(card);
+                }
             }
         }
 

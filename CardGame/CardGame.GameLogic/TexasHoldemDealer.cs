@@ -21,16 +21,14 @@ namespace CardGame.GameLogic
 
         public override void DealForCurrentRound(Deck deck, Player player)
         {
-            int cardsToDeal;
-            switch (_game.CurrentRound)
+            int cardsToDeal = 0;
+            if (_game.currentRound == 1)
             {
-                case 1:
-                    cardsToDeal = 3;
-                    break;
-
-                case 2:
-                    cardsToDeal = 1;
-                    break;
+                cardsToDeal = 3;
+            }
+            else
+            {
+                cardsToDeal = 1;
             }
 
             if (player is DummyPlayer)
