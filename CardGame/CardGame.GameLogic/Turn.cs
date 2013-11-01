@@ -12,6 +12,12 @@ namespace CardGame.GameLogic
         private LinkedList<Player> _turnOrder;
         private LinkedListNode<Player> _currentPlayerNode;
 
+        public Turn(IEnumerable<Player> players)
+        {
+            _turnOrder = new LinkedList<Player>(players);
+            _currentPlayerNode = _turnOrder.First;
+        }
+
         public Player CurrentPlayer { get { return _currentPlayerNode.Value; } }
 
         public bool AdvanceToNextPlayer()
