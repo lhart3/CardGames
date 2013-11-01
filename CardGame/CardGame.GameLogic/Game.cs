@@ -10,6 +10,8 @@ namespace CardGame.GameLogic
         public IEnumerable<Player> Players { get; private set; }
         public Deck Deck { get; private set; }
 
+        public Turn Turn { get; private set; }
+
         public Dealer Dealer { get; private set; }
         public int currentRound;
 
@@ -29,6 +31,5 @@ namespace CardGame.GameLogic
 
             Players = list;
         }
-        public abstract int CurrentRound();
     }
 }
