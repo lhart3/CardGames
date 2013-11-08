@@ -17,7 +17,8 @@ namespace CardGame.Controllers
         }
         public ActionResult login(string username, string password)
         {
-            return View("Index", (object) "Not valid");
+            //return View("Index", (object) "Not valid");
+            return RedirectToAction("GameSelect", "SelectGame");
         }
     }
 }

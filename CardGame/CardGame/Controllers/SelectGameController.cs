@@ -13,7 +13,7 @@ namespace CardGame.Controllers
         //
         // GET: /SelectGame/
 
-        public ActionResult Index()
+        public ActionResult GameSelect()
         {
             return View();
         }

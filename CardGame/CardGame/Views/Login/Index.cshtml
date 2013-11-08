@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="index.css" />
+    <link rel="Stylesheet" type="text/css" href="~/Content/index.css" />
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
 </head>
@@ -15,6 +15,7 @@
     <div class="vCenter" id="vCenter">
     @using (Html.BeginForm("login", "Login"))
     {
+        <img alt="Banner" src="../../Images/CardGameBanner.jpg" />
         <p>Username: <input id="userName"  /></p>
         <p>Password: <input id="Password" type="password" /></p>
         <input id="logon" type="submit" value="submit" />
