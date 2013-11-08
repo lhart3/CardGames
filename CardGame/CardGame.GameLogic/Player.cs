@@ -9,10 +9,7 @@ namespace CardGame.GameLogic
     {
         public Guid Id { get; private set; }
         public int Currency { get; set; }
-        public List<Card> Hand { get; private set; }
-
-        public int RequestedCardCount { get; set; }
-
+     
         protected Player()
         {
         }
@@ -20,7 +17,6 @@ namespace CardGame.GameLogic
         public Player(Guid id)
         {
             Id = id;
-            Hand = new List<Card>();
         }
 
         public bool Equals(Player other)
