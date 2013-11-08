@@ -230,8 +230,10 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\5CardPoker.jpg" />
     <Content Include="Images\BlackJack.jpg" />
     <Content Include="Images\CardGameBanner.jpg" />
+    <Content Include="Images\TexasHoldem.jpg" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
