@@ -34,5 +34,10 @@ namespace CardGame.GameLogic
                 return false;
             }
         }
+
+        public void RemoveFromHand(Player player)
+        {
+            _turnOrder.Remove(player);
+        }
     }
 }

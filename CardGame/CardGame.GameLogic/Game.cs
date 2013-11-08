@@ -13,6 +13,9 @@ namespace CardGame.GameLogic
         public Turn Turn { get; private set; }
 
         public Dealer Dealer { get; private set; }
+
+        public List<Card> Discard { get; private set; }
+
         public int currentRound;
 
         public Game(Player[] players, Deck deck, Dealer dealer)
@@ -31,5 +34,8 @@ namespace CardGame.GameLogic
 
             Players = list;
         }
+
+
+        
     }
 }
