@@ -30,4 +30,16 @@ namespace CardGame.GameLogic.Events
             yield return new BidCommand() { Player = playerHand.Player, BidAmount = BidAmount };
         }
     }
+    public class AnteBidEvent : IEvent
+    {
+        public Guid PlayerId { get; set; }
+        public int BidAmount { get; set; }
+
+        public IEnumerable<ICommand> GenerateCommands(Game game)
+        {
+            var playerHand = game.Turn.Players.FirstOrDefault(h => h.Player.Id == PlayerId);
+
+            yield return new BidCommand() { Player = playerHand.Player, BidAmount = 25 };
+        }
+    }
 }

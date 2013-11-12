@@ -16,7 +16,7 @@ namespace CardGame.GameLogic
     {
         public abstract int StartingHandSize { get; }
 
-        public override void DealStartingHand(Deck deck, IEnumerable<Player> players)
+        public override void DealStartingHand(Deck deck, IEnumerable<PlayerHand> players)
         {
             for (int i = 0; i < StartingHandSize; i++)
             {

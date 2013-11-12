@@ -16,6 +16,8 @@ namespace CardGame.GameLogic
 
         public List<Card> Discard { get; private set; }
 
+        public List<Card> DummyHand { get; private set; }
+
         public int currentRound;
 
         public Game(Player[] players, Deck deck, Dealer dealer)

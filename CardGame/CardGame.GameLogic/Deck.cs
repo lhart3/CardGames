@@ -17,7 +17,7 @@ namespace CardGame.GameLogic
             Shuffle();
         }
 
-        private void Populate()
+        public void Populate()
         {
 
             for (int i = 1; i < 14; i++)

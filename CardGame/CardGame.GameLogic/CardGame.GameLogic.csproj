@@ -47,6 +47,8 @@
     <Compile Include="Commands\DrawCommand.cs" />
     <Compile Include="Commands\FoldCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\NewDeck.cs" />
+    <Compile Include="Commands\NewHandCommand.cs" />
     <Compile Include="Commands\Turn\AdvanceTurnCommand.cs" />
     <Compile Include="Dealer.cs" />
     <Compile Include="DealerPlayer.cs" />

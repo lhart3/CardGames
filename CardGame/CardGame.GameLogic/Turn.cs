@@ -11,8 +11,8 @@ namespace CardGame.GameLogic
         public int Pot { get; set; }
         public int HighBid { get { return _turnOrder.Max(h => h.HighBid); } }
 
-        private LinkedList<PlayerHand> _turnOrder;
-        private LinkedListNode<PlayerHand> _currentPlayerNode;
+        public LinkedList<PlayerHand> _turnOrder;
+        public LinkedListNode<PlayerHand> _currentPlayerNode;
 
         public Turn(IEnumerable<Player> players)
         {
@@ -38,7 +38,7 @@ namespace CardGame.GameLogic
             }
         }
 
-        public void RemoveFromHand(Player player)
+        public void RemoveFromHand(PlayerHand player)
         {
             _turnOrder.Remove(player);
         }
