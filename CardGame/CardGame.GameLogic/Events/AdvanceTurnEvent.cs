@@ -7,11 +7,11 @@ using CardGame.GameLogic.Commands.Turn;
 
 namespace CardGame.GameLogic.Events
 {
-    public class AdvanceTurnEvent : IEvent
+    public class AdvanceTurnEvent : EventBase
     {
         public bool AdvancesToNextRound { get; set; }
 
-        public IEnumerable<ICommand> GenerateCommands(Game game)
+        public override IEnumerable<ICommand> GenerateCommands(Game game)
         {
             yield return new AdvanceTurnCommand() { AdvancesToNextRound = AdvancesToNextRound };
         }

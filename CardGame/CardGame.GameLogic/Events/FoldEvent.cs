@@ -6,10 +6,9 @@ using CardGame.GameLogic.Commands;
 
 namespace CardGame.GameLogic.Events
 {
-    public class FoldEvent : IEvent
+    public class FoldEvent : EventBase
     {
-        Guid PlayerId { get; set; }
-        public IEnumerable<Commands.ICommand> GenerateCommands(Game game)
+        public override IEnumerable<Commands.ICommand> GenerateCommands(Game game)
         {
             var player = game.Players.FirstOrDefault(p => p.Id == PlayerId);
 
