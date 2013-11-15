@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AIPlayer.cs" />
+    <Compile Include="AIPlayerGames.cs" />
     <Compile Include="Blackjack.cs" />
     <Compile Include="BlackjackDealer.cs" />
     <Compile Include="Card.cs" />
