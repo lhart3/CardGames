@@ -165,6 +165,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BlackJackController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SelectGameController.cs" />
     <Compile Include="Global.asax.cs">
@@ -296,6 +297,9 @@
       <Project>{c977cd1b-8153-47e6-8f6e-a4ab0a1b9696}</Project>
       <Name>CardGame.GameLogic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\BlackJack\BlackJack.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

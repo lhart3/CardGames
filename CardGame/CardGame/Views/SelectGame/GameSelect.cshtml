@@ -18,15 +18,18 @@
     <table align="center" style="width:75%; text-align:center;">
         <tr>
             <td>
-                <a href=""><img alt="BlackJack" src="../../Images/BlackJack.jpg"/></a>
+            @using (Html.BeginForm("BlackJack", "SelectGame"))
+            {
+                <input type="image" src="../../Images/BlackJack.jpg" alt="Submit" />
                 <h2>BlackJack</h2>
+            }
             </td>
             <td>
-                <a href=""><img alt="5 Card Poker" src="../../Images/5CardPoker.jpg" /></a>
+                <input type="image" src="../../Images/5CardPoker.jpg" alt="Submit" />
                 <h2>5 Card Poker</h2>
             </td>
             <td>
-                <a href=""><img alt="Texas Holdem" src="../../Images/TexasHoldem.jpg" /></a>
+                <input type="image" src="../../Images/TexasHoldem.jpg" alt="Submit" />
                 <h2>Texas Holdem</h2>
             </td>
         </tr>

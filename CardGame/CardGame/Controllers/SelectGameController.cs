@@ -17,6 +17,11 @@ namespace CardGame.Controllers
         {
             return View();
         }
+        public ActionResult BlackJack(string username, string password)
+        {
+            //return View("Index", (object) "Not valid");
+            return RedirectToAction("BlackJack", "BlackJack");
+        }
 
     }
 }
