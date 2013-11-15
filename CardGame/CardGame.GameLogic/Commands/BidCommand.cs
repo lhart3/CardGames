@@ -6,7 +6,7 @@ using System.Text;
 namespace CardGame.GameLogic.Commands
 {
 
-    class BidCommand : ICommand
+    public class BidCommand : ICommand
     {
         public Player Player { get; set; }
         public int BidAmount{ get; set; }
@@ -26,7 +26,7 @@ namespace CardGame.GameLogic.Commands
     {
         public override void Process(Game game)
         {
-            var playerHand = game.Turn.Players.FirstOrDefault(h => h.Player == Player);
+            var playerHand = game.Turn.GetHandForPlayer(Player);
             BidAmount = game.Turn.HighBid - playerHand.HighBid;
 
             base.Process(game);

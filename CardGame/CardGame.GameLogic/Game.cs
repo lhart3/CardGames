@@ -10,7 +10,7 @@ namespace CardGame.GameLogic
         public IEnumerable<Player> Players { get; private set; }
         public Deck Deck { get; private set; }
 
-        public Turn Turn { get; private set; }
+        public Turn Turn { get; set; }
 
         public Dealer Dealer { get; private set; }
 

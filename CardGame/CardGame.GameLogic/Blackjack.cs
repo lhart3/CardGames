@@ -30,13 +30,13 @@ namespace CardGame.GameLogic
 
         public override bool TryCheckForWinner(out Player winner)
         {
-            foreach (var player in Players)
+            foreach (var player in Turn.Players)
             {
                 var score = player.Hand.Sum(c => GetValue(c, true));
 
                 if (score == 21)
                 {
-                    winner = player;
+                    winner = player.Player;
                     return true;
                 }
 
@@ -44,7 +44,7 @@ namespace CardGame.GameLogic
 
                 if (score == 21)
                 {
-                    winner = player;
+                    winner = player.Player;
                     return true;
                 }
             }

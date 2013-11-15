@@ -7,9 +7,9 @@ namespace CardGame.GameLogic
 {
     public abstract class Dealer
     {
-        public abstract void DealStartingHand(Deck deck, IEnumerable<Player> players);
+        public abstract void DealStartingHand(Deck deck, IEnumerable<PlayerHand> players);
 
-        public abstract void DealForCurrentRound(Deck deck, Player player);
+        public abstract void DealForCurrentRound(Deck deck, PlayerHand player, int count);
     }
 
     public abstract class DealerForGameWithFixedStartingHandSize : Dealer

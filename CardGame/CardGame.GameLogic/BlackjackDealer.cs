@@ -7,9 +7,9 @@ namespace CardGame.GameLogic
 {
     public class BlackjackDealer : DealerForGameWithFixedStartingHandSize
     {
-        public override void DealForCurrentRound(Deck deck, Player player)
+        public override void DealForCurrentRound(Deck deck, PlayerHand player, int count)
         {
-            if (player.RequestedCardCount > 0)
+            if (count > 0)
                 player.Hand.Add(deck.Draw());
         }
 

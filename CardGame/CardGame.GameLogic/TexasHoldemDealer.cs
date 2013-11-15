@@ -20,7 +20,7 @@ namespace CardGame.GameLogic
 
         public override int StartingHandSize { get { return 2; } }
 
-        public override void DealForCurrentRound(Deck deck, PlayerHand player)
+        public override void DealForCurrentRound(Deck deck, PlayerHand player, int count)
         {
             int cardsToDeal = 0;
             if (_game.currentRound == 1)

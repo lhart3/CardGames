@@ -12,7 +12,8 @@ namespace CardGame.GameLogic.Commands
 
         public void Process(Game game)
         {
-            game.Dealer.DealForCurrentRound(game.Deck, Player);
+            var playerHand = game.Turn.GetHandForPlayer(Player);
+            game.Dealer.DealForCurrentRound(game.Deck, playerHand, DrawCount);
         }
     }
 }

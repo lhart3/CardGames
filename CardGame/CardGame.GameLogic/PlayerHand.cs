@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CardGame.GameLogic
 {
-    class PlayerHand
+    public class PlayerHand
     {
         public List<Card> Hand { get; private set; }
         public Player Player { get; set; }

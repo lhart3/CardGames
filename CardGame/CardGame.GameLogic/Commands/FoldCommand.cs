@@ -7,7 +7,7 @@ namespace CardGame.GameLogic.Commands
 {
     public class FoldCommand : ICommand
     {
-        public Player Player { get; set; }
+        public PlayerHand Player { get; set; }
  
         public void Process(Game game)
         {

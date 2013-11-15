@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CardGame.GameLogic.Turn;
 
 namespace CardGame.GameLogic.Commands
 {
@@ -13,9 +12,8 @@ namespace CardGame.GameLogic.Commands
             game.Deck.Populate();
             game.Deck.Shuffle();
             game.Discard.Clear();
-            game.Turn.Pot = 0;
-            game.Turn.RoundNumber = 1;
-            game.Turn._currentPlayerNode = game.Turn._turnOrder.First;
+
+            game.Turn = new GameLogic.Turn(game.Players);
         }
     }
 }

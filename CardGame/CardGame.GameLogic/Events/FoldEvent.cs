@@ -14,7 +14,10 @@ namespace CardGame.GameLogic.Events
             var player = game.Players.FirstOrDefault(p => p.Id == PlayerId);
 
             if (player != null)
-                yield return new FoldCommand() { Player = player };
+            {
+                var playerHand = game.Turn.GetHandForPlayer(player);
+                yield return new FoldCommand() { Player = playerHand };
+            }
         }
     }
 }

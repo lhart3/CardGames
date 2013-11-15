@@ -11,13 +11,15 @@ namespace CardGame.GameLogic
         public int Pot { get; set; }
         public int HighBid { get { return _turnOrder.Max(h => h.HighBid); } }
 
-        public LinkedList<PlayerHand> _turnOrder;
-        public LinkedListNode<PlayerHand> _currentPlayerNode;
+        private LinkedList<PlayerHand> _turnOrder;
+        private LinkedListNode<PlayerHand> _currentPlayerNode;
 
         public Turn(IEnumerable<Player> players)
         {
             _turnOrder = new LinkedList<PlayerHand>(players.Select(p=>new PlayerHand(p)));
             _currentPlayerNode = _turnOrder.First;
+
+
         }
 
         public PlayerHand CurrentPlayer { get { return _currentPlayerNode.Value; } }
@@ -41,6 +43,12 @@ namespace CardGame.GameLogic
         public void RemoveFromHand(PlayerHand player)
         {
             _turnOrder.Remove(player);
+        }
+
+        public PlayerHand GetHandForPlayer(Player player)
+        {
+            var playerHand = Players.FirstOrDefault(h => h.Player == player);
+            return playerHand;
         }
     }
 }
