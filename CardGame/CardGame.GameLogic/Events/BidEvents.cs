@@ -23,6 +23,12 @@ namespace CardGame.GameLogic.Events
         public Guid PlayerId { get; set; }
         public int BidAmount { get; set; }
 
+        public RaiseBidEvent(Guid playerId, int bidAmount)
+        {
+            PlayerId = playerId;
+            BidAmount = bidAmount;
+        }
+
         public IEnumerable<ICommand> GenerateCommands(Game game)
         {
             var playerHand = game.Turn.Players.FirstOrDefault(h => h.Player.Id == PlayerId);
