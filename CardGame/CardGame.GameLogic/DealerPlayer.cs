@@ -5,7 +5,7 @@ using System.Web;
 
 namespace CardGame.GameLogic
 {
-    public class DealerPlayer : Player
+    public class DealerPlayer
     {
     }
 }

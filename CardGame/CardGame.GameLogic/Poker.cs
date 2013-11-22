@@ -18,7 +18,35 @@ namespace CardGame.GameLogic
             {
                 return value;
             }
+            else if (FourofaKind(hand, out value))
+            {
+                return value;
+            }
+            else if (FullHouse(hand, out value))
+            {
+                return value;
+            }
+            else if (Flush(hand, out value))
+            {
+                return value;
+            }
+            else if (Straight(hand, out value))
+            {
+                return value;
+            }
+            else if (ThreeofaKind(hand, out value))
+            {
+                return value;
+            }
+            else if (TwoPair(hand, out value))
+            {
+                return value;
+            }
             else if (Onepair(hand, out value))
+            {
+                return value;
+            }
+            else
             {
                 return value;
             }
@@ -40,18 +68,48 @@ namespace CardGame.GameLogic
         public bool FourofaKind(PlayerHand playerhand, out HandValue value)
         {
             var cardNumericValues = playerhand.Hand.Select(c => (int)c.Number).OrderByDescending(v => v);
-            Rank = 7;
+            Dictionary<int, int> dictionary = new Dictionary<int, int>();
+            foreach (int c in cardNumericValues)
+            {
+                if (!dictionary.ContainsValue(c))
+                {
+                    dictionary[c] = 1;
+                }
+                else
+                {
+                    dictionary[c] = dictionary[c] + 1;
+                }
+            }
+            if (dictionary.Values.Any(v => v == 4))
+            {
+                value = new HandValue() { Rank = 7, Ordered_Values = cardNumericValues.ToList() };
+                return true;
+            }
+            value = null;
+            return false;
         }
         public bool FullHouse(PlayerHand playerhand, out HandValue value)
         {
             var cardNumericValues = playerhand.Hand.Select(c => (int)c.Number).OrderByDescending(v => v);
-            ThreeofaKind(playerhand, out value);
-            TwoPair(playerhand, out value);
-            if (ThreeofaKind(playerhand, out value) == true && TwoPair(playerhand, out value) == true)
+            Dictionary<int, int> dictionary = new Dictionary<int, int>();
+            foreach (int c in cardNumericValues)
+            {
+                if (!dictionary.ContainsValue(c))
+                {
+                    dictionary[c] = 1;
+                }
+                else
+                {
+                    dictionary[c] = dictionary[c] + 1;
+                }
+            }
+            if (dictionary.Values.Any(v => v == 3) && dictionary.Values.Any(v => v == 2))
             {
                 value = new HandValue() { Rank = 6, Ordered_Values = cardNumericValues.ToList() };
                 return true;
             }
+            value = null;
+            return false;
 
             // create new Dictionary<int, int>
             // foreach card
@@ -66,8 +124,6 @@ namespace CardGame.GameLogic
             // two pair
             // dictionary.Values.Count(v => v == 2) == 2
 
-            value = null;
-            return false;
         }
         public bool Flush(PlayerHand playerhand, out HandValue value)
         {
@@ -85,17 +141,58 @@ namespace CardGame.GameLogic
         {
             var cardNumericValues = playerhand.Hand.Select(c => (int)c.Number).OrderByDescending(v => v);
             if (cardNumericValues.First() - cardNumericValues.Last() == cardNumericValues.Count() - 1 && cardNumericValues.Distinct().Count() == cardNumericValues.Count())
-            Rank = 4;
+            {
+                value = new HandValue() { Rank = 4, Ordered_Values = cardNumericValues.ToList() };
+                return true;
+            }
+            value = null;
+            return false; 
         }
         public bool ThreeofaKind(PlayerHand playerhand, out HandValue value)
         {
             var cardNumericValues = playerhand.Hand.Select(c => (int)c.Number).OrderByDescending(v => v);
-            Rank = 3;
+            Dictionary<int, int> dictionary = new Dictionary<int, int>();
+            foreach (int c in cardNumericValues)
+            {
+                if (!dictionary.ContainsValue(c))
+                {
+                    dictionary[c] = 1;
+                }
+                else
+                {
+                    dictionary[c] = dictionary[c] + 1;
+                }
+            }
+            if (dictionary.Values.Any(v => v == 3))
+            {
+                value = new HandValue() { Rank = 3, Ordered_Values = cardNumericValues.ToList() };
+                return true;
+            }
+            value = null;
+            return false;
         }
         public bool TwoPair(PlayerHand playerhand, out HandValue value)
         {
             var cardNumericValues = playerhand.Hand.Select(c => (int)c.Number).OrderByDescending(v => v);
-            Rank = 2;
+            Dictionary<int, int> dictionary = new Dictionary<int, int>();
+            foreach (int c in cardNumericValues)
+            {
+                if (!dictionary.ContainsValue(c))
+                {
+                    dictionary[c] = 1;
+                }
+                else
+                {
+                    dictionary[c] = dictionary[c] + 1;
+                }
+            }
+            if (dictionary.Values.Count(v => v == 2) == 2)
+            {
+                value = new HandValue() { Rank = 2, Ordered_Values = cardNumericValues.ToList() };
+                return true;
+            }
+            value = null;
+            return false;
         }
         public bool Onepair(PlayerHand playerhand, out HandValue value)
         {
@@ -115,7 +212,7 @@ namespace CardGame.GameLogic
         {
             var cardNumericValues = playerhand.Hand.Select(c => (int)c.Number).OrderByDescending(v => v);
             var cardNumericValue = playerhand.Hand.Select(c => (int)c.Number).Max();
-            if (cardNumericValue > 1)
+            if (cardNumericValue == cardNumericValues.Max())
             {
                 value = new HandValue() { Rank = 0, Ordered_Values = cardNumericValues.ToList() };
                 return true;

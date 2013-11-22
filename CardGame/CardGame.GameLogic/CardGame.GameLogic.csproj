@@ -43,9 +43,11 @@
     <Compile Include="AIPlayerGames.cs" />
     <Compile Include="Blackjack.cs" />
     <Compile Include="BlackjackDealer.cs" />
+    <Compile Include="BlackJackHandValue.cs" />
     <Compile Include="Card.cs" />
     <Compile Include="Commands\BidCommand.cs" />
     <Compile Include="Commands\CommandProcessor.cs" />
+    <Compile Include="Commands\DoublingDownCommand.cs" />
     <Compile Include="Commands\DrawCommand.cs" />
     <Compile Include="Commands\FoldCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />

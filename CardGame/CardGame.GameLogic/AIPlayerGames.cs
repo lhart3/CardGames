@@ -7,9 +7,19 @@ namespace CardGame.GameLogic
 {
     class AIPlayerGames : AIPlayer
     {
-        public override void PlayGame(Game game)
+        public override void BlackJack(Game game)
         {
+            
+        }
 
+        public override void TexasHoldEm(Game game)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void FiveHandPoker(Game game)
+        {
+            throw new NotImplementedException();
         }
     }
 }
