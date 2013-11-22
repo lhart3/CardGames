@@ -18,8 +18,6 @@ namespace CardGame.GameLogic
         {
             _turnOrder = new LinkedList<PlayerHand>(players.Select(p=>new PlayerHand(p)));
             _currentPlayerNode = _turnOrder.First;
-
-
         }
 
         public PlayerHand CurrentPlayer { get { return _currentPlayerNode.Value; } }
