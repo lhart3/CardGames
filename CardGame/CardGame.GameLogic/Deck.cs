@@ -19,12 +19,11 @@ namespace CardGame.GameLogic
 
         public void Populate()
         {
-
             for (int i = 1; i < 14; i++)
             {
                 foreach (var suit in suits.all)
                 {
-                    var card = new Card(suit, i);
+                    Card card = new Card(suit, i);
                     Cards.Enqueue(card);
                 }
             }
@@ -32,14 +31,14 @@ namespace CardGame.GameLogic
 
         public void Shuffle()
         {
-            var list = new List<Card>(Cards);
+            List<Card> list = new List<Card>(Cards);
             Cards = new Queue<Card>();
 
             var random= new Random();
             while (list.Count > 0)
             {
-                var index = random.Next(list.Count);
-                var card = list[index];
+                Int32 index = random.Next(list.Count);
+                Card card = list[index];
                 list.RemoveAt(index);
                 Cards.Enqueue(card);
             }
@@ -57,7 +56,7 @@ namespace CardGame.GameLogic
             }
             else
             {
-                var card = Cards.Dequeue();
+                Card card = Cards.Dequeue();
 
                 return card;
             }

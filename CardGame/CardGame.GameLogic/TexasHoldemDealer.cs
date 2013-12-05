@@ -35,7 +35,9 @@ namespace CardGame.GameLogic
             if (player is DummyPlayer)
             {
                 for (int i = 0; i < cardsToDeal; ++i)
+                {
                     player.Hand.Add(deck.Draw());
+                }
             }
         }
     }

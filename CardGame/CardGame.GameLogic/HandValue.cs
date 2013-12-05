@@ -10,9 +10,9 @@ namespace CardGame.GameLogic
         public int Rank;
         public List<int> Ordered_Values;
 
-        public int CompareTo(HandValue other)
+        public int IComparable.CompareTo(HandValue other)
         {
-            var result = this.Rank - other.Rank;
+            Int32 result = this.Rank - other.Rank;
             if (result != 0)
             {
                 return result;

@@ -12,6 +12,7 @@ namespace CardGame.GameLogic
      
         protected Player()
         {
+
         }
 
         public Player(Guid id)

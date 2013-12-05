@@ -28,10 +28,10 @@ namespace CardGame.GameLogic
         }
         public override bool TryCheckForWinner(PlayerHand playerHand, out Player winner)
         {
-            foreach (var player in Turn.Players)
+            foreach (PlayerHand player in Turn.Players)
             {
-                var score = player.Hand.Sum(c => GetValue(c, true));
-                if (score == 12)
+                Int32 score = player.Hand.Sum(c => GetValue(c, true));
+                if (score == 21)
                 {
                       winner = player.Player;
                       return true;
@@ -42,7 +42,7 @@ namespace CardGame.GameLogic
         }
         public bool Bust(PlayerHand playerHand, out BlackJackHandValue value)
         {
-            var score = playerHand.Hand.Sum(c => GetValue(c, false));
+            Int32 score = playerHand.Hand.Sum(c => GetValue(c, false));
             if (score > 21)
             {
                 score = playerHand.Hand.Sum(c => GetValue(c, true));
@@ -57,7 +57,7 @@ namespace CardGame.GameLogic
         }
         public bool ComputerStand(PlayerHand dealerHand, out BlackJackHandValue value)
         {
-            var score = dealerHand.Hand.Sum(c => GetValue(c, false));
+            Int32 score = dealerHand.Hand.Sum(c => GetValue(c, false));
 
             if (score > 16)
             {
@@ -70,9 +70,9 @@ namespace CardGame.GameLogic
         }
         public bool ComputerSoftStand(PlayerHand dealerhand, out BlackJackHandValue value)
         {
-            var score = dealerhand.Hand.Sum(c => GetValue(c, true));
+            Int32 score = dealerhand.Hand.Sum(c => GetValue(c, true));
 
-            if (score < 16)
+            if (score > 16)
             {
                 value = new BlackJackHandValue() { HandScore = score };
                 return true;
@@ -90,7 +90,6 @@ namespace CardGame.GameLogic
 
             if (splittingPairs.Count < playerhand.Hand.Count)
             {
-                
                 return true;
             }
             return false;

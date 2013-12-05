@@ -5,15 +5,13 @@ using System.Text;
 
 namespace CardGame.GameLogic.Commands
 {
-    class NewHandCommand : ICommand
+    class NewBlackJackHandCommand : ICommand
     {
         public virtual void Process(Game game)
         {
-            game.Deck.Populate();
-            game.Deck.Shuffle();
-            game.Discard.Clear();
-
-            game.Turn = new GameLogic.Turn(game.Players);
+            DealerPlayer dp = new DealerPlayer();
+            dp.StartUp();
+            dp.FSM(game);
         }
     }
 }

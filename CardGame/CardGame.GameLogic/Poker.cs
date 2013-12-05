@@ -127,7 +127,7 @@ namespace CardGame.GameLogic
         }
         public bool Flush(PlayerHand playerhand, out HandValue value)
         {
-            var suitCount = playerhand.Hand.Select(c => c.Suit).Distinct().Count();
+            Int32 suitCount = playerhand.Hand.Select(c => c.Suit).Distinct().Count();
             if (suitCount == 1)
             {
                 var cardNumericValues = playerhand.Hand.Select(c => (int)c.Number).OrderByDescending(v => v);
