@@ -5,13 +5,13 @@ using System.Text;
 
 namespace CardGame.GameLogic
 {
-    public class BlackJackHandValue : IComparable<BlackJackHandValue>
+    public class BlackJackHandValue : IComparable
     {
         public int HandScore;
         public List<int> SplittingPairs;
-        public int CompareTo(BlackJackHandValue dealer)
+        public int CompareTo(int player, int dealer)
         {
-            Int32 result = this.HandScore - dealer.HandScore;
+            Int32 result = player - dealer;
             if (result < 1)
             {
                 return -1;

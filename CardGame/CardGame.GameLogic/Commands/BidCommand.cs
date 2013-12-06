@@ -25,7 +25,7 @@ namespace CardGame.GameLogic.Commands
         }
     }
 
-    public class MatchCommand : BidCommand
+    public class MatchBidCommand : BidCommand
     {
         public override IEnumerable<IEvent> Process(Game game)
         {

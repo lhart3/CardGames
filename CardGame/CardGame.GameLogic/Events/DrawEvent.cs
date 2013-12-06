@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CardGame.GameLogic.Commands;
 
 namespace CardGame.GameLogic.Events
 {
@@ -9,7 +10,7 @@ namespace CardGame.GameLogic.Events
     {
         public override IEnumerable<Commands.ICommand> GenerateCommands(Game game)
         {
-            yield break;
+            yield return new DrawCommand();
         }
     }
 }

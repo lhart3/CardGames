@@ -6,11 +6,11 @@ using CardGame.GameLogic.Commands;
 
 namespace CardGame.GameLogic.Events
 {
-    public class NewBlackJackHandEvent : EventBase
+    class NewDeckEvent : IEvent
     {
-        public override IEnumerable<Commands.ICommand> GenerateCommands(Game game)
+         public override IEnumerable<Commands.ICommand> GenerateCommands(Game game)
         {
-            yield return new NewBlackJackHandCommand();
+            yield return new NewDeckCommand();
         }
     }
 }

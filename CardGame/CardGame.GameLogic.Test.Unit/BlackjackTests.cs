@@ -23,7 +23,7 @@ namespace CardGame.GameLogic.Test.Unit
 
             var eventProcessor = new EventProcessor();
 
-            var newhandevent = new NewHandEvent();
+            var newhandevent = new NewBlackJackHandEvent();
 
             var events = new List<IEvent>() { newhandevent };
 

@@ -14,7 +14,7 @@ namespace CardGame.GameLogic.Events
         {
             var playerHand = game.Turn.Players.FirstOrDefault(h => h.Player.Id == PlayerId);
 
-            yield return new MatchCommand() { Player = playerHand.Player };
+            yield return new MatchBidCommand() { Player = playerHand.Player };
         }
     }
 

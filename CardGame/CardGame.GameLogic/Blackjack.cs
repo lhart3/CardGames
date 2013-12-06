@@ -7,6 +7,9 @@ namespace CardGame.GameLogic
 {
     public class Blackjack : Game
     {
+        private int score;
+        private PlayerHand Dealerplayer;
+        private bool doubleDown = true;
         public Blackjack(Player[] players, Deck deck, BlackjackDealer dealer) : base(players, deck, dealer)
         {
 
@@ -27,56 +30,54 @@ namespace CardGame.GameLogic
 
             return (int)card.Number;
         }
-        public override bool TryCheckForWinner(out Player winner)
+        public override bool TryCheckForWinner(PlayerHand player)
         {
-            foreach (PlayerHand player in Turn.Players)
+            int score2;
+            foreach (PlayerHand dealerPlayer in Turn.Players)
             {
-                Int32 score = player.Hand.Sum(c => GetValue(c, true));
-                if (score == 21)
+                if (dealerPlayer.GetType() == typeof(BlackjackDealerPlayer))
                 {
-                      winner = player.Player;
-                      return true;
+                    Dealerplayer = dealerPlayer;
+                    score = dealerPlayer.Hand.Sum(d => GetValue(d, false));
                 }
             }
-            winner = null;
-            return false;
+            score2 = player.Hand.Sum(d => GetValue(d, false));
+            if (score.CompareTo(score2) == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        public bool Bust(PlayerHand playerHand, out BlackJackHandValue value)
+        public bool Bust(PlayerHand playerHand)
         {
             Int32 score = playerHand.Hand.Sum(c => GetValue(c, true));
             if (score > 21)
             {
-                value = new BlackJackHandValue() { HandScore = -1 };
                 return true;
             }
-
-            value = null;
             return false;
         }
-        public bool ComputerStand(PlayerHand dealerHand, out BlackJackHandValue value)
+        public bool ComputerStand(PlayerHand dealerHand)
         {
             Int32 score = dealerHand.Hand.Sum(c => GetValue(c, false));
 
             if (score > 16)
             {
-                value = new BlackJackHandValue() { HandScore = score };
                 return true;
             }
-
-            value = null;
             return false;
         }
-        public bool ComputerSoftStand(PlayerHand dealerhand, out BlackJackHandValue value)
+        public bool ComputerSoftStand(PlayerHand dealerhand)
         {
             Int32 score = dealerhand.Hand.Sum(c => GetValue(c, true));
 
             if (score > 16)
             {
-                value = new BlackJackHandValue() { HandScore = score };
                 return true;
             }
-
-            value = null;
             return false;
         }
         public bool SplittingPairsHand(PlayerHand playerhand)
@@ -101,16 +102,12 @@ namespace CardGame.GameLogic
             }
             return false;
         }
-        //Information came from the website www.blackjackinfo.com/blackjack-rules.php
-        public BlackJackHandValue GetBlackJackHandValue(PlayerHand playerHand)
+        public void ToggleDoubleDown()
         {
-            BlackJackHandValue value;
-            if (!Bust(playerHand, out value))
-            {
-                return value;
-            }
-            return null;
+            doubleDown = !doubleDown;
+
         }
+        //Information came from the website www.blackjackinfo.com/blackjack-rules.php
     }
 
 }
