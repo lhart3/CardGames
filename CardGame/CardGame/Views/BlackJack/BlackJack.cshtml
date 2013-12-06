@@ -2,13 +2,20 @@
     Layout = "~/Views/shared/_Layout.cshtml";
  }
 
-@Html.ActionLink("Fold","playerFold")
+@*@Html.ActionLink("Fold","playerFold")
 @Html.ActionLink("Hit", "playerHit")
-@Html.ActionLink("Stay", "playerStay")
+@Html.ActionLink("Stay", "playerStay")*@
+
+@using (Html.BeginForm("Fold", "playerFold"))
+{
+    <input id="Fold" type="button" value="Fold" />
+    <input id="Hit" type="button" value="Hit" />
+    <input id="Stay" type="button" value="Stay" />
+}
 @using (Html.BeginForm("playerBet", "BlackJack"))
 {
     <input name="betAmount"  />
-    <br>
+    <br />
     <input id="bet" type="submit" value="Bet" />
     
 }
