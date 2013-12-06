@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CardGame.GameLogic.Commands.Turn;
+using CardGame.GameLogic.Commands;
+using CardGame.GameLogic.Events;
 
 namespace CardGame.GameLogic.Commands
 {
@@ -10,13 +11,20 @@ namespace CardGame.GameLogic.Commands
     {
         private List<ICommand> _allCommandsEver = new List<ICommand>();
 
-        public void ProcessCommands(Game game, IEnumerable<ICommand> commands)
+        public IEnumerable<IEvent> ProcessCommands(Game game, IEnumerable<ICommand> commands)
         {
+            var newEvents = new List<IEvent>();
+
             foreach (var command in commands)
-                command.Process(game);
+            {
+                var generatedEvents = command.Process(game);
+                newEvents.AddRange(generatedEvents);
+            }
 
             // 'log' the commands
             _allCommandsEver.AddRange(commands);
+
+            return newEvents;
         }
     }
 }

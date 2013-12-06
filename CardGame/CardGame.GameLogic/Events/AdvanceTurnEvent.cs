@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CardGame.GameLogic.Commands;
-using CardGame.GameLogic.Commands.Turn;
 
 namespace CardGame.GameLogic.Events
 {

@@ -9,11 +9,6 @@ namespace CardGame.GameLogic
     {
         public Guid Id { get; private set; }
         public int Currency { get; set; }
-     
-        protected Player()
-        {
-
-        }
 
         public Player(Guid id)
         {

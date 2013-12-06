@@ -8,7 +8,7 @@ namespace CardGame.GameLogic
     public abstract class Game
     {
         public IEnumerable<Player> Players { get; private set; }
-        public Deck Deck { get; private set; }
+        public Deck Deck { get; set; }
 
         public Turn Turn { get; set; }
 
@@ -24,7 +24,10 @@ namespace CardGame.GameLogic
         {
             Players = players;
             Deck = deck;
+            Discard = new List<Card>();
             Dealer = dealer;
+
+            Turn = new Turn(players);
         }
 
         public abstract bool TryCheckForWinner(out Player winner);

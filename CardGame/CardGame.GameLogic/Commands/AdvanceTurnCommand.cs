@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CardGame.GameLogic.Events;
 
-namespace CardGame.GameLogic.Commands.Turn
+namespace CardGame.GameLogic.Commands
 {
     class AdvanceTurnCommand : ICommand
     {
         public bool AdvancesToNextRound { get; set; }
 
-        public void Process(Game game)
+        public IEnumerable<IEvent> Process(Game game)
         {
             // advance to next player
             var startedNewRound = game.Turn.AdvanceToNextPlayer();
@@ -17,6 +18,8 @@ namespace CardGame.GameLogic.Commands.Turn
             // if we are back at the beginning, advance to next round
             if (startedNewRound && AdvancesToNextRound)
                 game.Turn.RoundNumber++;
+
+            return Enumerable.Empty<IEvent>();
         }
     }
 }

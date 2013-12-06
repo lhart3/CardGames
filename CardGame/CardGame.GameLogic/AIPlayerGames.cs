@@ -12,11 +12,12 @@ namespace CardGame.GameLogic
         public bool hisTurn = false;
 
         #region BlackJackFunctionsForNonDealers
-        public override void BlackJack(Game game)
+        public override void Play(Game game)
         {
-            AIPlayerBlackJackFSM(game);
+            var blackjack = (Blackjack)game;
+            AIPlayerBlackJackFSM(blackjack);
         }
-        public void AIPlayerBlackJackFSM(Game game)
+        public void AIPlayerBlackJackFSM(Blackjack game)
         {
             while (hisTurn)
             {
@@ -38,17 +39,17 @@ namespace CardGame.GameLogic
        {
            hisTurn = !hisTurn;
        }
-       private void BlackJackChecking(Game game)
+       private void BlackJackChecking(Blackjack game)
        {
            aiState = AIState.Pass;
            aiState = AIState.Hit;
         }
-        private void BlackJackHit(Game game)
+       private void BlackJackHit(Blackjack game)
         {
             game.Turn.CurrentPlayer.Hand.Add(game.Deck.Draw());
             aiState = AIState.Checking;
         }
-        private void BlackJackPass(Game game)
+        private void BlackJackPass(Blackjack game)
         {
             BlackJackChangeHisTurn();
             game.Turn.AdvanceToNextPlayer();
@@ -57,9 +58,9 @@ namespace CardGame.GameLogic
                 BlackJackChangeHisTurn();
                 aiState = AIState.Checking;
             }
-            else if (game.Turn.CurrentPlayer.GetType() == typeof(DealerPlayer))
+            else if (game.Turn.CurrentPlayer.GetType() == typeof(BlackjackDealerPlayer))
             {
-                DealerPlayer dp = new DealerPlayer();
+                BlackjackDealerPlayer dp = new BlackjackDealerPlayer();
                 BlackJackChangeHisTurn();
                 dp.BlackJackChangeAlive();
                 dp.DealerBlackJackFSM(game);
@@ -71,19 +72,6 @@ namespace CardGame.GameLogic
         }
         #endregion
 
-        #region TexasHoldEmFunctionsForNonDealers
-        public override void TexasHoldEm(Game game)
-        {
-            throw new NotImplementedException();
-        }
-        #endregion
-
-        #region FiveHandPokerFunctionsForNonDealers
-        public override void FiveHandPoker(Game game)
-        {
-            throw new NotImplementedException();
-        }
-        #endregion
     }
     public enum AIState
     {

@@ -2,16 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CardGame.GameLogic.Events;
 
 namespace CardGame.GameLogic.Commands
 {
     class NewBlackJackHandCommand : ICommand
     {
-        public virtual void Process(Game game)
+        public virtual IEnumerable<IEvent> Process(Game game)
         {
-            DealerPlayer dp = new DealerPlayer();
-            dp.BlackJackStartUp();
-            dp.DealerBlackJackFSM(game);
+            game.Turn = new Turn(game.Players);
+
+            game.Discard.Clear();
+            game.Deck = new Deck();
+
+            game.Dealer.DealStartingHand(game.Deck, game.Turn.Players);
+
+            return Enumerable.Empty<IEvent>();
         }
     }
 }

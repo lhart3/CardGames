@@ -16,6 +16,7 @@ namespace CardGame.GameLogic.Events
             {
                 var playerHand = game.Turn.GetHandForPlayer(player);
                 yield return new FoldCommand() { Player = playerHand };
+                yield return new AdvanceTurnCommand() { AdvancesToNextRound = true };
             }
         }
     }

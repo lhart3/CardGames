@@ -5,11 +5,6 @@ using System.Text;
 
 namespace CardGame.GameLogic
 {
-    class DummyPlayer : Player
-    {
-        
-    }
-
     class TexasHoldemDealer : DealerForGameWithFixedStartingHandSize
     {
         Game _game;
@@ -30,14 +25,6 @@ namespace CardGame.GameLogic
             else
             {
                 cardsToDeal = 1;
-            }
-
-            if (player is DummyPlayer)
-            {
-                for (int i = 0; i < cardsToDeal; ++i)
-                {
-                    player.Hand.Add(deck.Draw());
-                }
             }
         }
     }

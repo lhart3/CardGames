@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CardGame.GameLogic.Events;
 
 namespace CardGame.GameLogic.Commands
 {
@@ -11,7 +12,7 @@ namespace CardGame.GameLogic.Commands
         public Player Player { get; set; }
         public int BidAmount{ get; set; }
 
-        public virtual void Process(Game game)
+        public virtual IEnumerable<IEvent> Process(Game game)
         {
             // either bid the requested amount, or go all in
             var bid = Math.Min(BidAmount, Player.Currency);
@@ -19,17 +20,19 @@ namespace CardGame.GameLogic.Commands
             Player.Currency = Player.Currency - bid;
             game.Turn.Pot = game.Turn.Pot + bid;
             game.Turn.CurrentPlayer.HighBid += bid;
+
+            return Enumerable.Empty<IEvent>();
         }
     }
 
     public class MatchCommand : BidCommand
     {
-        public override void Process(Game game)
+        public override IEnumerable<IEvent> Process(Game game)
         {
             var playerHand = game.Turn.GetHandForPlayer(Player);
             BidAmount = game.Turn.HighBid - playerHand.HighBid;
 
-            base.Process(game);
+            return base.Process(game);
         }
     }
 }

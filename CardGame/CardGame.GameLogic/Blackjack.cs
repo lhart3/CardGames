@@ -11,6 +11,7 @@ namespace CardGame.GameLogic
         {
 
         }
+
         public int GetValue(Card card, bool aceAsOne)
         {
             if (card.Number == CardType.Ace)
@@ -26,7 +27,7 @@ namespace CardGame.GameLogic
 
             return (int)card.Number;
         }
-        public override bool TryCheckForWinner(PlayerHand playerHand, out Player winner)
+        public override bool TryCheckForWinner(out Player winner)
         {
             foreach (PlayerHand player in Turn.Players)
             {
@@ -42,16 +43,13 @@ namespace CardGame.GameLogic
         }
         public bool Bust(PlayerHand playerHand, out BlackJackHandValue value)
         {
-            Int32 score = playerHand.Hand.Sum(c => GetValue(c, false));
+            Int32 score = playerHand.Hand.Sum(c => GetValue(c, true));
             if (score > 21)
             {
-                score = playerHand.Hand.Sum(c => GetValue(c, true));
-                if (score > 21)
-                {
-                    value = new BlackJackHandValue() { HandScore = -1 };
-                    return true;
-                }
+                value = new BlackJackHandValue() { HandScore = -1 };
+                return true;
             }
+
             value = null;
             return false;
         }

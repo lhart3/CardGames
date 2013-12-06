@@ -7,8 +7,11 @@ namespace CardGame.GameLogic
 {
     public abstract class AIPlayer : Player
     {
-        public abstract void BlackJack(Game game);
-        public abstract void TexasHoldEm(Game game);
-        public abstract void FiveHandPoker(Game game);
+        public AIPlayer()
+            : base(Guid.NewGuid())
+        {
+        }
+
+        public abstract void Play(Game game);
     }
 }

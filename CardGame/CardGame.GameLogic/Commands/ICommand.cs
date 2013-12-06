@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CardGame.GameLogic.Events;
 
 namespace CardGame.GameLogic.Commands
 {
     public interface ICommand
     {
-        void Process(Game game);
+        IEnumerable<IEvent> Process(Game game);
     }
 }
