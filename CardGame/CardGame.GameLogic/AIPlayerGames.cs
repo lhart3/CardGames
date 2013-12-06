@@ -9,12 +9,14 @@ namespace CardGame.GameLogic
     public class AIPlayerGames : AIPlayer
     {
         public AIState aiState;
-        public bool hisTurn = true;
+        public bool hisTurn = false;
+
+        #region BlackJackFunctionsForNonDealers
         public override void BlackJack(Game game)
         {
-            AIPlayerFSM(game);
+            AIPlayerBlackJackFSM(game);
         }
-        public void AIPlayerFSM(Game game)
+        public void AIPlayerBlackJackFSM(Game game)
         {
             while (hisTurn)
             {
@@ -24,38 +26,64 @@ namespace CardGame.GameLogic
                        BlackJackChecking(game);
                       break;
                   case AIState.Hit:
-                      Hit(game);
+                      BlackJackHit(game);
                       break;
                   case AIState.Pass:
                       BlackJackPass(game);
                       break;
-                    }
                 }
             }
+       }
+       public void BlackJackChangeHisTurn()
+       {
+           hisTurn = !hisTurn;
+       }
        private void BlackJackChecking(Game game)
        {
            aiState = AIState.Pass;
            aiState = AIState.Hit;
         }
-        private void Hit(Game game)
+        private void BlackJackHit(Game game)
         {
             game.Turn.CurrentPlayer.Hand.Add(game.Deck.Draw());
             aiState = AIState.Checking;
         }
         private void BlackJackPass(Game game)
         {
+            BlackJackChangeHisTurn();
             game.Turn.AdvanceToNextPlayer();
-            aiState = AIState.Checking;
+            if (game.Turn.CurrentPlayer.GetType() == typeof(AIPlayerGames))
+            {
+                BlackJackChangeHisTurn();
+                aiState = AIState.Checking;
+            }
+            else if (game.Turn.CurrentPlayer.GetType() == typeof(DealerPlayer))
+            {
+                DealerPlayer dp = new DealerPlayer();
+                BlackJackChangeHisTurn();
+                dp.BlackJackChangeAlive();
+                dp.DealerBlackJackFSM(game);
+            }
+            else
+            {
+                return;
+            }
         }
+        #endregion
+
+        #region TexasHoldEmFunctionsForNonDealers
         public override void TexasHoldEm(Game game)
         {
             throw new NotImplementedException();
         }
+        #endregion
 
+        #region FiveHandPokerFunctionsForNonDealers
         public override void FiveHandPoker(Game game)
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
     public enum AIState
     {

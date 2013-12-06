@@ -6,77 +6,107 @@ using System.Collections;
 
 namespace CardGame.GameLogic
 {
-    public class DealerPlayer : AIPlayerGames
+    public class DealerPlayer : AIPlayer
     {
         public DealerState state = DealerState.Init;
         public bool alive = true;
         private Deck deck;
         private IEnumerable<PlayerHand> players;
-        public void StartUp()
+        public DealerPlayer()
+        {
+
+        }
+        #region BlackJackFunctionsForDealer
+        public override void BlackJack(Game game)
+        {
+            BlackJackStartUp();
+            DealerBlackJackFSM(game);
+        }
+        public void BlackJackStartUp()
         {
             alive = true;
             state = DealerState.Init;
         }
-        public void FSM(Game game)
+        public void DealerBlackJackFSM(Game game)
         {
             while (alive)
             {
                 switch (state)
                 {
                     case DealerState.Init:
-                        Init(game);
+                        BlackJackInit(game);
                         break;
                     case DealerState.Setup:
-                        Setup(game);
+                        BlackJackSetup(game);
                         break;
                     case DealerState.Deal:
-                        Deal(game);
+                        BlackJackDeal(game);
                         break;
                     case DealerState.Checking:
-                        Checking(game);
+                        BlackJackChecking(game);
                         break;
                     case DealerState.Hit:
-                        Hit(game);
+                        BlackJackHit(game);
                         break;
                     case DealerState.EndGame:
-                        EndGame(game);
+                        BlackJackEndHand(game);
                         break;
                 }
             }
         }
-        private void Init(Game game)
+        public void BlackJackChangeAlive()
+        {
+            alive = !alive;
+        }
+        private void BlackJackInit(Game game)
         {
             game.Turn = new GameLogic.Turn(game.Players);
             game.Discard.Clear();
             state = DealerState.Setup;
         }
-        private void Setup(Game game)
+        private void BlackJackSetup(Game game)
         {
             deck = new Deck();
             players = game.Turn.Players;
             state = DealerState.Deal;
         }
-        private void Deal(Game game)
+        private void BlackJackDeal(Game game)
         {
             game.Dealer.DealStartingHand(deck, players);
             state = DealerState.Checking;
+            BlackJackChangeAlive();
         }
-        private void Checking(Game game)
+        private void BlackJackChecking(Game game)
         {
             foreach(PlayerHand ph in players)
             {
                 
             }
         }
-        private void Hit(Game game)
+        private void BlackJackHit(Game game)
         {
             game.Turn.CurrentPlayer.Hand.Add(game.Deck.Draw());
             state = DealerState.Checking;
         }
-        private void EndGame(Game game)
+        private void BlackJackEndHand(Game game)
         {
             alive = false;
         }
+        #endregion
+ 
+        #region TexasHoldEmFunctionsForDealer
+        public override void TexasHoldEm(Game game)
+        {
+            
+        }
+        #endregion
+
+        #region FiveHandPokerFunctionsForDealer
+        public override void FiveHandPoker(Game game)
+        {
+
+        }
+        #endregion
     }
     public enum DealerState
     {

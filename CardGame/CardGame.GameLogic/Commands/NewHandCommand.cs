@@ -10,8 +10,8 @@ namespace CardGame.GameLogic.Commands
         public virtual void Process(Game game)
         {
             DealerPlayer dp = new DealerPlayer();
-            dp.StartUp();
-            dp.FSM(game);
+            dp.BlackJackStartUp();
+            dp.DealerBlackJackFSM(game);
         }
     }
 }

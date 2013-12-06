@@ -5,12 +5,12 @@ using System.Text;
 
 namespace CardGame.GameLogic
 {
-    class HandValue : IComparable<HandValue>
+    public class HandValue : IComparable<HandValue>
     {
         public int Rank;
         public List<int> Ordered_Values;
 
-        public int IComparable.CompareTo(HandValue other)
+        public int CompareTo(HandValue other)
         {
             Int32 result = this.Rank - other.Rank;
             if (result != 0)

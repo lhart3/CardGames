@@ -30,7 +30,7 @@ namespace CardGame.GameLogic
             if (_currentPlayerNode == null)
             {
                 _currentPlayerNode = _turnOrder.First;
-                return true;
+                    return true;
             }
             else
             {
