@@ -30,7 +30,7 @@ namespace CardGame.GameLogic
             Turn = new Turn(players);
         }
 
-        public abstract bool TryCheckForWinner(out Player winner);
+        public abstract bool TryCheckForWinner(PlayerHand player, out Player winner);
 
         public void AddPlayer(Player player)
         {

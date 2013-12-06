@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CardGame.GameLogic
 {
-    public class BlackJackHandValue : IComparable
+    public class BlackJackHandValue : IComparable<BlackJackHandValue>
     {
         public int HandScore;
         public List<int> SplittingPairs;

@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using CardGame.GameLogic.Events;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using CardGame.GameLogic.Events;
+using CardGame.GameLogic.Commands;
 
 namespace CardGame.GameLogic.Test.Unit
 {
-    class TestBlackJackGame
+    public class TestBlackJackGame
     {
         [TestClass]
         public class BlackjackTests

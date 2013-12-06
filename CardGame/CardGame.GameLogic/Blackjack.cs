@@ -30,7 +30,7 @@ namespace CardGame.GameLogic
 
             return (int)card.Number;
         }
-        public override bool TryCheckForWinner(PlayerHand player)
+        public override bool TryCheckForWinner(PlayerHand player, out Player winner)
         {
             int score2;
             foreach (PlayerHand dealerPlayer in Turn.Players)
@@ -44,10 +44,12 @@ namespace CardGame.GameLogic
             score2 = player.Hand.Sum(d => GetValue(d, false));
             if (score.CompareTo(score2) == 1)
             {
+                winner = player.Player;
                 return true;
             }
             else
             {
+                winner = Dealerplayer.Player;
                 return false;
             }
         }
