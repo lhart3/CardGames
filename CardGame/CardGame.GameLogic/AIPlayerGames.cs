@@ -47,14 +47,21 @@ namespace CardGame.GameLogic
        }
        private void BlackJackChecking(Blackjack game)
        {
-           PlayerHand Hand = game.Turn.GetHandForPlayer(game.Turn.CurrentPlayer.Player);
-           Int32 score = game.Turn.CurrentPlayer.Hand.Sum(c => game.GetValue(c, true));
-           if (!game.Bust(Hand))
-               if (game.ComputerStand(Hand))
+           game.ResetCounter();
+           PlayerHand PlayerHand = game.Turn.GetHandForPlayer(game.Turn.CurrentPlayer.Player);
+           Int32 aces = PlayerHand.Hand.Sum(d => game.CheckNumberOfAces(d));
+           Int32 score = game.Turn.CurrentPlayer.Hand.Sum(c => game.GetValue(c, false, aces));
+           if (score > 21)
+           {
+               game.ResetCounter();
+               score = game.Turn.CurrentPlayer.Hand.Sum(c => game.GetValue(c, true, aces));
+           }
+           if (!game.Bust(PlayerHand))
+               if (game.ComputerStand(PlayerHand))
                {
                    if (score > 19)
                    {
-                       if (game.DoublingDown(Hand))
+                       if (game.DoublingDown(PlayerHand))
                        {
                            aiState = AIState.Pass;
                        }
@@ -69,7 +76,7 @@ namespace CardGame.GameLogic
                    }
                    else
                    {
-                       if (!game.ComputerSoftStand(Hand))
+                       if (!game.ComputerSoftStand(PlayerHand))
                        {
                            aiState = AIState.Hit;
                        }
@@ -85,7 +92,7 @@ namespace CardGame.GameLogic
                }
            else
            {
-               if (!game.ComputerSoftStand(Hand))
+               if (!game.ComputerSoftStand(PlayerHand))
                {
                    aiState = AIState.Hit;
                }

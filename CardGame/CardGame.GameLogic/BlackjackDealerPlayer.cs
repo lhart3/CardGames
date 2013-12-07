@@ -61,13 +61,21 @@ namespace CardGame.GameLogic
         }
         private void BlackJackChecking(Blackjack game)
         {
-            PlayerHand Hand = game.Turn.GetHandForPlayer(game.Turn.CurrentPlayer.Player);
-            Int32 score = game.Turn.CurrentPlayer.Hand.Sum(c => game.GetValue(c, true));
+            game.ResetCounter();
+            PlayerHand PlayerHand = game.Turn.GetHandForPlayer(game.Turn.CurrentPlayer.Player);
+            Int32 aces =  PlayerHand.Hand.Sum(d => game.CheckNumberOfAces(d));
+            Int32 score = game.Turn.CurrentPlayer.Hand.Sum(c => game.GetValue(c, false, aces));
+            if (score > 21)
+            {
+                game.ResetCounter();
+                score = game.Turn.CurrentPlayer.Hand.Sum(c => game.GetValue(c, true, aces));
+            }
+            Int32 aces2 = 0;
             int score2 = 0;
             int totalPot = 0;
-            if (!game.Bust(Hand))
+            if (!game.Bust(PlayerHand))
             {
-                if (game.ComputerStand(Hand))
+                if (game.ComputerStand(PlayerHand))
                 {
                    foreach (PlayerHand ph in game.Turn.Players)
                    {
@@ -77,8 +85,15 @@ namespace CardGame.GameLogic
                        }
                        else
                        {
-                           score2 = ph.Hand.Sum(d => game.GetValue(d, true));
-                           if (score - score2 > -1)
+                           game.ResetCounter();
+                           aces2 = PlayerHand.Hand.Sum(d => game.CheckNumberOfAces(d));
+                           score2 = ph.Hand.Sum(d => game.GetValue(d, false, aces2));
+                           if (score2 > 21)
+                           {
+                               game.ResetCounter();
+                               score2 = ph.Hand.Sum(d => game.GetValue(d, true, aces2));
+                           }
+                           if (score.CompareTo(score2) == 1)
                            {
                                profitToLoss += ph.HighBid;
                                totalPot += ph.HighBid;
@@ -92,7 +107,7 @@ namespace CardGame.GameLogic
                    }
                    if (profitToLoss < (-1 * (totalPot * .10)))
                    {
-                       if (!game.ComputerSoftStand(Hand))
+                       if (!game.ComputerSoftStand(PlayerHand))
                        {
                            state = DealerState.Hit;
                        }
@@ -113,7 +128,7 @@ namespace CardGame.GameLogic
            }
            else
            {
-               if (!game.ComputerSoftStand(Hand))
+               if (!game.ComputerSoftStand(PlayerHand))
                {
                    state = DealerState.Hit;
                }
@@ -131,12 +146,20 @@ namespace CardGame.GameLogic
         private void BlackJackEndHand(Blackjack game)
         {
             alive = false;
+            int aces;
             foreach (PlayerHand dealerPlayer in game.Turn.Players)
             {
                 if (dealerPlayer.GetType() == typeof(BlackjackDealerPlayer))
                 {
                     Dealerplayer = dealerPlayer;
-                    score = dealerPlayer.Hand.Sum(d => game.GetValue(d, false));
+                    game.ResetCounter();
+                    aces = Dealerplayer.Hand.Sum(d => game.CheckNumberOfAces(d));
+                    score = Dealerplayer.Hand.Sum(d => game.GetValue(d, false, aces));
+                    if (score > 21)
+                    {
+                        game.ResetCounter();
+                        score = Dealerplayer.Hand.Sum(d => game.GetValue(d, true, aces));
+                    }
                 }
             }
             foreach (PlayerHand player in game.Turn.Players)
@@ -147,7 +170,7 @@ namespace CardGame.GameLogic
                 }
                 else
                 {
-                    if (game.TryCheckForWinner(player))
+                    if (game.TryCheckForWinner(player, out winner))
                     {
                         player.Player.Currency = player.HighBid * 2;
                         Dealerplayer.Player.Currency = Dealerplayer.Player.Currency - player.HighBid;
