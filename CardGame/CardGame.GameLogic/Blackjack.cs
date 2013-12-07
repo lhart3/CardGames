@@ -66,11 +66,11 @@ namespace CardGame.GameLogic
                 if (dealerPlayer.GetType() == typeof(BlackjackDealerPlayer))
                 {
                     Dealerplayer = dealerPlayer;
-                    aces = dealerPlayer.Hand.Sum(d => CheckNumberOfAces(d));
-                    score = dealerPlayer.Hand.Sum(d => GetValue(d, false, aces));
+                    aces = Dealerplayer.Hand.Sum(d => CheckNumberOfAces(d));
+                    score = Dealerplayer.Hand.Sum(d => GetValue(d, false, aces));
                     if (score > 21)
                     {
-                        score = dealerPlayer.Hand.Sum(d => GetValue(d, true, aces));
+                        score = Dealerplayer.Hand.Sum(d => GetValue(d, true, aces));
                     }
                 }
             }

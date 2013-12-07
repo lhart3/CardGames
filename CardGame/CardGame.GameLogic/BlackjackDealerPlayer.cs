@@ -147,6 +147,7 @@ namespace CardGame.GameLogic
         {
             alive = false;
             int aces;
+            
             foreach (PlayerHand dealerPlayer in game.Turn.Players)
             {
                 if (dealerPlayer.GetType() == typeof(BlackjackDealerPlayer))
@@ -162,22 +163,23 @@ namespace CardGame.GameLogic
                     }
                 }
             }
-            foreach (PlayerHand player in game.Turn.Players)
+            foreach (PlayerHand playerhand in game.Turn.Players)
             {
-                if (player.GetType() == typeof(BlackjackDealerPlayer))
+                if (playerhand.GetType() == typeof(BlackjackDealerPlayer))
                 {
                     
                 }
                 else
                 {
-                    if (game.TryCheckForWinner(player, out winner))
+                    
+                    if (game.TryCheckForWinner(playerhand, out winner))
                     {
-                        player.Player.Currency = player.HighBid * 2;
-                        Dealerplayer.Player.Currency = Dealerplayer.Player.Currency - player.HighBid;
+                        playerhand.Player.Currency = playerhand.HighBid * 2;
+                        Dealerplayer.Player.Currency = Dealerplayer.Player.Currency - playerhand.HighBid;
                     }
                     else
                     {
-                        Dealerplayer.Player.Currency = Dealerplayer.Player.Currency + player.HighBid;
+                        Dealerplayer.Player.Currency = Dealerplayer.Player.Currency + playerhand.HighBid;
                     }
                 }
             }
