@@ -11,10 +11,47 @@
     <table >
         <tr style="height:650px;">
             <td style="background-image: url('http://localhost:26622/Images/blackjackTable.jpg'); width:1457px;">
-                &nbsp;
+                <table style="vertical-align:top; text-align:center;">
+                    <tr style="text-align:center; vertical-align:top;">
+                        <td style="width:600px;">
+                        </td>
+                        <td>
+                            <img style="border:1px solid black;" alt="" src="../../Images/FaceDownCard.jpg" />
+                        </td>
+                        <td>
+                            <img style="border:1px solid black;" alt="" src="../../Images/FaceUpCard.jpg" />
+                        </td>
+                    </tr>
+                    <tr style="height:400px">
+                    </tr>
+                    <tr style="text-align:center; vertical-align:bottom;">
+                        <td style="width:600px;">
+                        </td>
+                        <td>
+                            <img style="border:1px solid black;" alt="" src="../../Images/FaceUpCard.jpg" />
+                        </td>
+                        <td>
+                            <img style="border:1px solid black;" alt="" src="../../Images/FaceUpCard.jpg" />
+                        </td>
+                    </tr>
+                </table>
             </td>
-            <td style="width:auto;">
-                &nbsp;
+        </tr>
+        <tr>
+            <td>
+                @using (Html.BeginForm("Fold", "playerFold"))
+                {
+                    <input id="Fold" type="button" value="Fold" />
+                    <input id="Hit" type="button" value="Hit" />
+                    <input id="Stay" type="button" value="Stay" />
+                }
+                @using (Html.BeginForm("playerBet", "BlackJack"))
+                {
+                    <input name="betAmount"  />
+                    <br />
+                    <input id="bet" type="submit" value="Bet" />
+    
+                }
             </td>
         </tr>
     </table>
