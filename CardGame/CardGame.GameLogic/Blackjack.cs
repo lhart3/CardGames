@@ -56,7 +56,19 @@ namespace CardGame.GameLogic
             }
             return number;
         }
-        public override bool TryCheckForWinner(PlayerHand player, out Player winner)
+        public int Comparison(int player, int dealer)
+        {
+            int result = player - dealer;
+            if (result < 1)
+            {
+                return -1;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+        public override Player TryCheckForWinner(PlayerHand player, out Player winner)
         {
             int score2;
             int aces = 0;
@@ -80,15 +92,15 @@ namespace CardGame.GameLogic
             {
                 score2 = player.Hand.Sum(d => GetValue(d, true, aces2));
             }
-            if (score.CompareTo(score2) == 1)
+            if (Comparison(score2, score) == 1)
             {
                 winner = player.Player;
-                return true;
+                return winner;
             }
             else
             {
                 winner = Dealerplayer.Player;
-                return false;
+                return winner;
             }
         }
         public bool Bust(PlayerHand playerHand)
@@ -155,7 +167,6 @@ namespace CardGame.GameLogic
         {
             doubleDown = !doubleDown;
         }
-        //Information came from the website www.blackjackinfo.com/blackjack-rules.php
     }
 
 }

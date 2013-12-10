@@ -147,7 +147,8 @@ namespace CardGame.GameLogic
         {
             alive = false;
             int aces;
-            
+            Player winner;
+
             foreach (PlayerHand dealerPlayer in game.Turn.Players)
             {
                 if (dealerPlayer.GetType() == typeof(BlackjackDealerPlayer))

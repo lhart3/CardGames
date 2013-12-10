@@ -8,7 +8,7 @@ namespace CardGame.GameLogic.Events
 {
     class DoublingDownEvent : IEvent
     {
-        Guid PlayerId { get; }
+        public Guid PlayerId { get; set; }
 
         public IEnumerable<Commands.ICommand> GenerateCommands(Game game)
         {
