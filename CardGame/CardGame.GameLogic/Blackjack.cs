@@ -76,7 +76,7 @@ namespace CardGame.GameLogic
             int aces2 = 0;
             foreach (PlayerHand dealerPlayer in Turn.Players)
             {
-                if (dealerPlayer.GetType() == typeof(BlackjackDealerPlayer))
+                if (dealerPlayer.Player.GetType() == typeof(BlackjackDealerPlayer))
                 {
                     Dealerplayer = dealerPlayer;
                     aces = Dealerplayer.Hand.Sum(d => CheckNumberOfAces(d));

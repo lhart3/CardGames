@@ -25,7 +25,7 @@ namespace CardGame.GameLogic
 
             foreach (PlayerHand dealerPlayer in game.Turn.Players)
             {
-                if (dealerPlayer.GetType() == typeof(BlackjackDealerPlayer))
+                if (dealerPlayer.Player.GetType() == typeof(BlackjackDealerPlayer))
                 {
                     Dealerplayer = dealerPlayer;
                 }
@@ -79,7 +79,7 @@ namespace CardGame.GameLogic
                 {
                    foreach (PlayerHand ph in game.Turn.Players)
                    {
-                       if (ph.GetType() == typeof(BlackjackDealerPlayer))
+                       if (ph.Player.GetType() == typeof(BlackjackDealerPlayer))
                        {
 
                        }
@@ -151,7 +151,7 @@ namespace CardGame.GameLogic
 
             foreach (PlayerHand dealerPlayer in game.Turn.Players)
             {
-                if (dealerPlayer.GetType() == typeof(BlackjackDealerPlayer))
+                if (dealerPlayer.Player.GetType() == typeof(BlackjackDealerPlayer))
                 {
                     Dealerplayer = dealerPlayer;
                     game.ResetCounter();
@@ -166,7 +166,7 @@ namespace CardGame.GameLogic
             }
             foreach (PlayerHand playerhand in game.Turn.Players)
             {
-                if (playerhand.GetType() == typeof(BlackjackDealerPlayer))
+                if (playerhand.Player.GetType() == typeof(BlackjackDealerPlayer))
                 {
                     
                 }
