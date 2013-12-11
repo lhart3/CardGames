@@ -7,51 +7,61 @@
 <body style="background-color:Green;">
 @RenderBody()
 <div class="vCenter">
-    <table >
+    <table>
         <tr style="height:650px;">
             <td style="background-image: url('http://localhost:26622/Images/blackjackTable.jpg'); width:1457px;">
                 <table style="vertical-align:top; text-align:center;">
                     <tr style="text-align:center; vertical-align:top;">
+
                         <td style="width:600px;">
                         </td>
-                        <td style="background-image: url('../../Images/FaceDownCard.jpg'); height:100px; width:70px">
-                            
+
+                        <td id = "dealersSecondCard" style="background-image: url('../../Images/FaceDownCard.jpg'); height:100px; width:70px">
                         </td>
-                        <td style="background-image: url('../../Images/FaceUpCard.jpg'); height:100px; width:70px">
-                            
+
+                        <td style="background-image: url('../../Images/FaceUpCard.jpg'); height:100px; width:70px">   
                         </td>
-                        <td>
+
+                        <td id="dealerhit1" style="background-image: url('../../Images/FaceUpCard.jpg'); height:100px; width:70px; visibility:hidden">
                         </td>
-                        <td>
+
+                        <td id="dealerhit2" style="background-image: url('../../Images/FaceUpCard.jpg'); height:100px; width:70px; visibility:hidden">
                         </td>
-                        <td>
+
+                        <td id="dealerhit3" style="background-image: url('../../Images/FaceUpCard.jpg'); height:100px; width:70px; visibility:hidden">
                         </td>
-                        <td>
+
+                        <td id="dealerhit4" style="background-image: url('../../Images/FaceUpCard.jpg'); height:100px; width:70px; visibility:hidden">
                         </td>
+
                     </tr>
+
                     <tr style="height:400px">
                     </tr>
+
                     <tr style="text-align:center; vertical-align:bottom;">
+
                         <td style="width:600px;">
                         </td>
+
                         <td style="background-image: url('../../Images/FaceUpCard.jpg'); height:100px; width:70px">
-                            
                         </td>
+
                         <td style="background-image: url('../../Images/FaceUpCard.jpg'); height:100px; width:70px">
-                            
                         </td>
+
                         <td id="playhit1" style="background-image: url('../../Images/FaceUpCard.jpg'); height:100px; width:70px; visibility:hidden">
-                        
                         </td>
+
                         <td id="playhit2" style="background-image: url('../../Images/FaceUpCard.jpg'); height:100px; width:70px; visibility:hidden">
-                        
                         </td>
+
                         <td id="playhit3" style="background-image: url('../../Images/FaceUpCard.jpg'); height:100px; width:70px; visibility:hidden">
-                        
                         </td>
+
                         <td id="playhit4" style="background-image: url('../../Images/FaceUpCard.jpg'); height:100px; width:70px; visibility:hidden">
-                        
                         </td>
+
                     </tr>
                 </table>
             </td>
@@ -61,25 +71,82 @@
                 @using (Html.BeginForm("Fold", "playerFold"))
                 {
                     <input id="Fold" type="button" value="Fold" />
-                    <input id="Hit" type="button" value="Hit" />
-                    <input id="Stay" type="button" value="Stay" />
+                    <input id="Hit" type="button" value="Hit" onclick = "javascript: showPlayersImage();" />
+                    <input id="Stay" type="button" value="Stay" onclick = "javascript: showDealersSC();" />
+                    <input id="NewHand" type="button" value= "New Hand" onclick = "javascript: ResetPlayerImage();" />
+                    <input id="Doubledown" type="button" value= "Double Down" onclick = "javascript: hideDoubleDown();" />
                 }
                 @using (Html.BeginForm("playerBet", "BlackJack"))
                 {
                     <input name="betAmount"  />
                     <br />
                     <input id="bet" type="submit" value="Bet" />
-    
                 }
             </td>
         </tr>
     </table>
+
     <script type="text/javascript">
-        function showImage() {
-            if (document.getElementById == ) {
+        function showPlayersImage()
+        {
+            if (document.getElementById('playhit1').style.visibility != 'visible')
+            {
                 document.getElementById('playhit1').style.visibility = 'visible';
+                document.getElementById('Doubledown').style.visibility = 'hidden';
             }
-        }  
+            else if (document.getElementById('playhit2').style.visibility != 'visible')
+            {
+                document.getElementById('playhit2').style.visibility = 'visible';
+            }
+            else if (document.getElementById('playhit3').style.visibility != 'visible')
+            {
+                document.getElementById('playhit3').style.visibility = 'visible';
+            }
+            else if (document.getElementById('playhit4').style.visibility != 'visible')
+            {
+                document.getElementById('playhit4').style.visibility = 'visible';
+            }
+        }
+        function ResetPlayerImage()
+        {
+            document.getElementById('playhit1').style.visibility = 'hidden';
+            document.getElementById('playhit2').style.visibility = 'hidden';
+            document.getElementById('playhit3').style.visibility = 'hidden';
+            document.getElementById('playhit4').style.visibility = 'hidden';
+            document.getElementById('dealerhit1').style.visibility = 'hidden';
+            document.getElementById('dealerhit2').style.visibility = 'hidden';
+            document.getElementById('dealerhit3').style.visibility = 'hidden';
+            document.getElementById('dealerhit4').style.visibility = 'hidden';
+            document.getElementById('Doubledown').style.visibility = 'visible';
+            document.getElementById('dealersSecondCard').style.backgroundImage = 'url(../../Images/FaceDownCard.jpg)';
+        }
+        function showDealersImage()
+        {
+            if (document.getElementById == 'dealerhit1' && document.getElementById('dealerhit1').style.visibility != 'visible')
+            {
+                document.getElementById('dealerhit1').style.visibility = 'visible';
+            }
+            else if (document.getElementById == 'dealerhit2' && document.getElementById('dealerhit2').style.visibility != 'visible')
+            {
+                document.getElementById('dealerhit2').style.visibility = 'visible';
+            }
+            else if (document.getElementById == 'dealerhit3' && document.getElementById('dealerhit3').style.visibility != 'visible')
+            {
+                document.getElementById('dealerhit3').style.visibility = 'visible';
+            }
+            else if (document.getElementById == 'dealerhit4' && document.getElementById('dealerhit4').style.visibility != 'visible')
+            {
+                document.getElementById('dealerhit4').style.visibility = 'visible';
+            }
+        }
+        function showDealersSC()
+        {
+            document.getElementById('dealersSecondCard').style.backgroundImage = 'url(../../Images/FaceUpCard.jpg)';
+        }
+        function hideDoubleDown()
+        {
+            document.getElementById('Doubledown').style.visibility = 'hidden';
+        }
     </script>
 </div>
 </body>

@@ -25,7 +25,7 @@ namespace CardGame.Controllers
             var eventProcessor = new EventProcessor();
             var commandProcessor = new CommandProcessor();
 
-            var commands = eventProcessor.Process(new[] { eventToProcess }, _game);
+            var commands = eventProcessor.ProcessEvents(new List<IEvent> { eventToProcess }, _game, true);
 
             commandProcessor.ProcessCommands(_game, commands);
         }
@@ -88,6 +88,12 @@ namespace CardGame.Controllers
             Guid playerId = TryGetPlayerId();
 
             var evt = new DoublingDownEvent();
+            actionEvent(evt);
+            return RedirectToAction("BlackJack");
+        }
+        public ActionResult NewBlackJackHand()
+        {
+            var evt = new NewBlackJackHandEvent();
             actionEvent(evt);
             return RedirectToAction("BlackJack");
         }
