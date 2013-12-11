@@ -18,6 +18,7 @@ namespace CardGame.GameLogic
         public void ResetCounter()
         {
             counter = 1;
+            doubleDown = true;
         }
         public int GetValue(Card card, bool aceAsOne, int IndexNumber)
         {

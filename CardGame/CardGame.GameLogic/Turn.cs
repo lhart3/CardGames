@@ -26,7 +26,7 @@ namespace CardGame.GameLogic
         public bool AdvanceToNextPlayer()
         {
             _currentPlayerNode = _currentPlayerNode.Next;
-
+            
             if (_currentPlayerNode == null)
             {
                 _currentPlayerNode = _turnOrder.First;
