@@ -18,7 +18,6 @@ namespace CardGame.GameLogic.Commands
 
                f = (Blackjack)game;
                f.DoublingDown(playerHand);
-               f.ToggleDoubleDown();
                return Enumerable.Empty<IEvent>();
         }
     }

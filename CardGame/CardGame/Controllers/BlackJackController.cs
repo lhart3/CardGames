@@ -20,7 +20,6 @@ namespace CardGame.Controllers
 
             return SetPlayerId(player.Id);
         }
-
         private void actionEvent(IEvent eventToProcess)
         {
             var eventProcessor = new EventProcessor();
@@ -30,14 +29,12 @@ namespace CardGame.Controllers
 
             commandProcessor.ProcessCommands(_game, commands);
         }
-
         public ActionResult SetPlayerId(Guid playerId)
         {
             this.Response.Cookies.Add(new HttpCookie("CardGamePlayerId", playerId.ToString()));
 
             return RedirectToAction("BlackJack");
         }
-
         private Guid TryGetPlayerId()
         {
             var cookie = this.Request.Cookies["CardGamePlayerId"];
@@ -53,12 +50,10 @@ namespace CardGame.Controllers
 
             return playerId;
         }
-
         public ActionResult BlackJack()
         {
             return View();
         }
-
         public ActionResult playerHit()
         {
             // perform hit event!
@@ -82,6 +77,5 @@ namespace CardGame.Controllers
         {
             return RedirectToAction("BlackJack");
         }
-
     }
 }

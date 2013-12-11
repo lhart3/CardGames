@@ -156,17 +156,14 @@ namespace CardGame.GameLogic
         }
         public bool DoublingDown(PlayerHand playerhand)
         {
-            if (playerhand.Hand.Count() == 2)
+            if (playerhand.Hand.Count() == 2 && doubleDown == false)
             {
                 playerhand.HighBid = playerhand.HighBid * 2;
+                doubleDown = true;
                 return true;
             }
+            doubleDown = false;
             return false;
         }
-        public void ToggleDoubleDown()
-        {
-            doubleDown = !doubleDown;
-        }
     }
-
 }
