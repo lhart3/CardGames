@@ -6,7 +6,7 @@ using CardGame.GameLogic.Commands;
 
 namespace CardGame.GameLogic.Events
 {
-    class DoublingDownEvent : IEvent
+    public class DoublingDownEvent : IEvent
     {
         public Guid PlayerId { get; set; }
 

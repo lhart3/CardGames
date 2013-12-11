@@ -56,6 +56,8 @@ namespace CardGame.Controllers
         }
         public ActionResult playerHit()
         {
+            var evt = new DrawEvent();
+            actionEvent(evt);
             // perform hit event!
             return RedirectToAction("BlackJack");
         }
@@ -71,10 +73,22 @@ namespace CardGame.Controllers
         }
         public ActionResult playerStay()
         {
+            var evt = new AdvanceTurnEvent();
+            actionEvent(evt);
             return RedirectToAction("BlackJack");
         }
         public ActionResult playerFold()
         {
+            var evt = new FoldEvent();
+            actionEvent(evt);
+            return RedirectToAction("BlackJack");
+        }
+        public ActionResult playerDoubleDown()
+        {
+            Guid playerId = TryGetPlayerId();
+
+            var evt = new DoublingDownEvent();
+            actionEvent(evt);
             return RedirectToAction("BlackJack");
         }
     }
