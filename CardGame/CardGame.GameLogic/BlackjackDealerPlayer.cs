@@ -173,7 +173,7 @@ namespace CardGame.GameLogic
                 else
                 {
                     
-                    if (game.TryCheckForWinner(playerhand, out winner))
+                    if (game.TryCheckForWinner(playerhand, out winner) == playerhand.Player)
                     {
                         playerhand.Player.Currency = playerhand.HighBid * 2;
                         Dealerplayer.Player.Currency = Dealerplayer.Player.Currency - playerhand.HighBid;
