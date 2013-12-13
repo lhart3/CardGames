@@ -10,7 +10,8 @@ namespace CardGame.GameLogic.Events
     {
         public override IEnumerable<Commands.ICommand> GenerateCommands(Game game)
         {
-            yield return new DrawCommand();
+            var player = game.Players.Single(p => p.Id == PlayerId);
+            yield return new DrawCommand(player, 1);
         }
     }
 }

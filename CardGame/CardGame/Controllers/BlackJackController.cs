@@ -11,30 +11,48 @@ namespace CardGame.Controllers
 {
     public class BlackJackController : Controller
     {
-        public static Game _game;
+        public static Blackjack _game;
+        public static List<IEvent> _events;
 
-        public ActionResult CreateNewGame()
+        public BlackJackController()
+        {
+        }
+
+        public ActionResult CreateGame()
         {
             var player = new Player(Guid.NewGuid());
-            _game = new Blackjack(new[] { player }, new Deck(), null);
+            var dealerPlayer = new BlackjackDealerPlayer();
+            var dealer = new BlackjackDealer();
+            _game = new Blackjack(new[] { player, dealerPlayer }, new Deck(), dealer);
+
+            NewBlackJackHand();
 
             return SetPlayerId(player.Id);
         }
-        private void actionEvent(IEvent eventToProcess)
+
+        private void actionEvent(IEvent eventToProcess, bool allEvents = false)
         {
             var eventProcessor = new EventProcessor();
             var commandProcessor = new CommandProcessor();
 
-            var commands = eventProcessor.ProcessEvents(new List<IEvent> { eventToProcess }, _game, true);
+            _events.Add(eventToProcess);
 
-            commandProcessor.ProcessCommands(_game, commands);
+            eventProcessor.ProcessEvents(_events, _game, allEvents);
         }
+
         public ActionResult SetPlayerId(Guid playerId)
         {
             this.Response.Cookies.Add(new HttpCookie("CardGamePlayerId", playerId.ToString()));
 
             return RedirectToAction("BlackJack");
         }
+
+        private Guid GetPlayerId()
+        {
+            var value = this.Request.Cookies.Get("CardGamePlayerId").Value;
+            return Guid.Parse(value);
+        }
+
         private Guid TryGetPlayerId()
         {
             var cookie = this.Request.Cookies["CardGamePlayerId"];
@@ -50,13 +68,18 @@ namespace CardGame.Controllers
 
             return playerId;
         }
+
         public ActionResult BlackJack()
         {
-            return View();
+            if (_game == null)
+                return RedirectToAction("CreateGame");
+
+            return View(_game);
         }
+
         public ActionResult playerHit()
         {
-            var evt = new DrawEvent();
+            var evt = new DrawEvent() { PlayerId = GetPlayerId() };
             actionEvent(evt);
             // perform hit event!
             return RedirectToAction("BlackJack");
@@ -73,7 +96,7 @@ namespace CardGame.Controllers
         }
         public ActionResult playerStay()
         {
-            var evt = new AdvanceTurnEvent();
+            var evt = new AdvanceTurnEvent() { PlayerId = GetPlayerId() };
             actionEvent(evt);
             return RedirectToAction("BlackJack");
         }
@@ -93,8 +116,10 @@ namespace CardGame.Controllers
         }
         public ActionResult NewBlackJackHand()
         {
+            _events = new List<IEvent>();
+
             var evt = new NewBlackJackHandEvent();
-            actionEvent(evt);
+            actionEvent(evt, true);
             return RedirectToAction("BlackJack");
         }
     }

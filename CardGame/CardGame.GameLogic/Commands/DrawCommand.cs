@@ -11,6 +11,12 @@ namespace CardGame.GameLogic.Commands
         public Player Player { get; set; }
         public int DrawCount { get; set; }
 
+        public DrawCommand(Player player, int drawCount)
+        {
+            Player = player;
+            DrawCount = drawCount;
+        }
+
         public IEnumerable<IEvent> Process(Game game)
         {
             var playerHand = game.Turn.GetHandForPlayer(Player);

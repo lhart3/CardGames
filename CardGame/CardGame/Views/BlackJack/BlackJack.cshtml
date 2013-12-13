@@ -1,8 +1,41 @@
-﻿@{
+﻿@model CardGame.GameLogic.Blackjack
+
+@{
     Layout = "~/Views/shared/_Layout.cshtml";
  }
 
 @*@Html.ActionLink("Fold","playerFold")
 @Html.ActionLink("Hit", "playerHit")
 @Html.ActionLink("Stay", "playerStay")*@
+
+@section DealerCards {
+    
+    @if (!Model.IsGameOver) {
+        <td id = "dealersSecondCard" style="background-image: url('../../Images/FaceDownCard.jpg'); height:100px; width:70px">
+        </td>
+        foreach (var card in Model.DealerPlayer.Hand.Skip(1))
+        {
+            <td style="background-image: url('../../Images/FaceUpCard.jpg'); height:100px; width:70px">   
+                <span>@card.Number</span><span>@card.Suit</span>
+            </td>
+        }
+    } else {
+        foreach (var card in Model.DealerPlayer.Hand)
+        {
+            <td style="background-image: url('../../Images/FaceUpCard.jpg'); height:100px; width:70px">   
+                <span>@card.Number</span><span>@card.Suit</span>
+            </td>
+        }   
+    }
+}
+
+@section PlayerCards {
+
+    @foreach (var card in Model.Turn.Players.First(p => p != Model.DealerPlayer).Hand)
+    {
+        <td style="background-image: url('../../Images/FaceUpCard.jpg'); height:100px; width:70px">   
+            <span>@card.Number</span><span>@card.Suit</span>
+        </td>
+    }
+}
     

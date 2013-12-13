@@ -29,8 +29,6 @@ namespace CardGame.GameLogic.Test.Unit
 
             var commands = eventProcessor.ProcessEvents(events, blackjack, true);
 
-            events.Add(new RunComputerPlayerTurnEvent() { PlayerId = dealerPlayer.Id });
-
             // player clicks 'hit'
             events.Add(new DrawEvent() { PlayerId = blackjack.Turn.CurrentPlayer.Player.Id });
             commands = eventProcessor.ProcessEvents(events, blackjack, false);

@@ -31,6 +31,8 @@ namespace CardGame.GameLogic
                 }
             }
             DealerBlackJackFSM(blackjackGame);
+
+            game.IsGameOver = true;
         }
         public void BlackJackDealerStartUp()
         {

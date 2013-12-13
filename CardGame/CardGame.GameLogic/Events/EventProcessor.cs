@@ -27,6 +27,7 @@ namespace CardGame.GameLogic.Events
                 commandsExcecuted.AddRange(commands);
 
                 processedAnEvent = commands.Any();
+                allEvents = false;
             }
             while (processedAnEvent);
 

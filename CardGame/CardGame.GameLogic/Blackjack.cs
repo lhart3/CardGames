@@ -7,6 +7,15 @@ namespace CardGame.GameLogic
 {
     public class Blackjack : Game
     {
+        public PlayerHand DealerPlayer
+        {
+            get
+            {
+                var dealer = Players.First(p => p is BlackjackDealerPlayer);
+                return Turn.Players.First(p => p.Player == dealer);
+            }
+        }
+
         private int score;
         private PlayerHand Dealerplayer;
         private bool doubleDown = true;
