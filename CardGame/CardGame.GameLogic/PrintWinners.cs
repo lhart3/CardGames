@@ -10,7 +10,7 @@ using CardGame.GameLogic;
 
 namespace CardGame.GameLogic
 {
-    public partial class PrintWinners : Form
+    public partial class PrintWinners :Form 
     {
         public PrintWinners(Blackjack game)
         {

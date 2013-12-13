@@ -39,7 +39,7 @@
             <td>
                 @using (Html.BeginForm("playerFold", "BlackJack")) 
                 {
-                    <input id="Fold" type="submit" value="Fold" />
+                    @*<input id="Fold" type="submit" value="Fold" />*@
                 }
                 @using (Html.BeginForm("playerHit", "BlackJack")) 
                 {
@@ -55,13 +55,17 @@
                 }
                 @using (Html.BeginForm("playerDoubleDown", "BlackJack"))
                 {
-                    <input id="Doubledown" type="submit" value= "Double Down" />
+                    @*<input id="Doubledown" type="submit" value= "Double Down" />*@
                 }
                 @using (Html.BeginForm("playerBet", "BlackJack"))
                 {
-                    <input name="betAmount"  />
+                    @RenderSection("RemainingBalance", false)
+                    <p><input name="Radio1" type="radio" value="10"  />$10</p>
+                    <p><input name="Radio1" type="radio" value="20" checked="true" />$20</p>
+                    <p><input name="Radio1" type="radio" value="50" />$50</p>
+                    @*<input name="betAmount"  />
                     <br />
-                    <input id="bet" type="submit" value="Bet" />
+                    <input id="bet" type="submit" value="Bet" />*@
                 }
             </td>
         </tr>

@@ -27,6 +27,10 @@
     }
 }
 
+@section RemainingBalance{
+    <p>Remaining Balance: @CardGame.GameLogic.Player.Currency</p>
+}
+
 @section PlayerCards {
 
     @foreach (var card in Model.Turn.Players.First(p => p != Model.DealerPlayer).Hand)
