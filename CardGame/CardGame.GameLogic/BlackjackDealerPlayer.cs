@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Collections;
+using CardGame.GameLogic;
 
 namespace CardGame.GameLogic
 {
@@ -15,7 +16,7 @@ namespace CardGame.GameLogic
         private int score = 0;
         public BlackjackDealerPlayer()
         {
-
+            Currency = 50000;
         }
         public override void Play(Game game)
         {
@@ -32,7 +33,7 @@ namespace CardGame.GameLogic
             }
             DealerBlackJackFSM(blackjackGame);
 
-            game.IsGameOver = true;
+            game.IsDealersTurn = true;
         }
         public void BlackJackDealerStartUp()
         {
@@ -65,7 +66,7 @@ namespace CardGame.GameLogic
         {
             game.ResetCounter();
             PlayerHand PlayerHand = game.Turn.GetHandForPlayer(game.Turn.CurrentPlayer.Player);
-            Int32 aces =  PlayerHand.Hand.Sum(d => game.CheckNumberOfAces(d));
+            Int32 aces = PlayerHand.Hand.Count(d => d.Number == CardType.Ace);
             Int32 score = game.Turn.CurrentPlayer.Hand.Sum(c => game.GetValue(c, false, aces));
             if (score > 21)
             {
@@ -88,7 +89,7 @@ namespace CardGame.GameLogic
                        else
                        {
                            game.ResetCounter();
-                           aces2 = PlayerHand.Hand.Sum(d => game.CheckNumberOfAces(d));
+                           aces2 = PlayerHand.Hand.Count(d => d.Number == CardType.Ace);
                            score2 = ph.Hand.Sum(d => game.GetValue(d, false, aces2));
                            if (score2 > 21)
                            {
@@ -149,7 +150,6 @@ namespace CardGame.GameLogic
         {
             alive = false;
             int aces;
-            Player winner;
 
             foreach (PlayerHand dealerPlayer in game.Turn.Players)
             {
@@ -157,7 +157,7 @@ namespace CardGame.GameLogic
                 {
                     Dealerplayer = dealerPlayer;
                     game.ResetCounter();
-                    aces = Dealerplayer.Hand.Sum(d => game.CheckNumberOfAces(d));
+                    aces = Dealerplayer.Hand.Count(d => d.Number == CardType.Ace);
                     score = Dealerplayer.Hand.Sum(d => game.GetValue(d, false, aces));
                     if (score > 21)
                     {
@@ -175,7 +175,7 @@ namespace CardGame.GameLogic
                 else
                 {
                     
-                    if (game.TryCheckForWinner(playerhand, out winner) == playerhand.Player)
+                    if (game.TryCheckForWinner(playerhand))
                     {
                         playerhand.Player.Currency = playerhand.HighBid * 2;
                         Dealerplayer.Player.Currency = Dealerplayer.Player.Currency - playerhand.HighBid;
@@ -186,6 +186,8 @@ namespace CardGame.GameLogic
                     }
                 }
             }
+            game.IsGameOver = true;
+            PrintWinners pw = new PrintWinners(game);
       }
 }
     public enum DealerState

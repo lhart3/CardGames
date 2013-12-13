@@ -49,7 +49,7 @@ namespace CardGame.GameLogic
        {
            game.ResetCounter();
            PlayerHand PlayerHand = game.Turn.GetHandForPlayer(game.Turn.CurrentPlayer.Player);
-           Int32 aces = PlayerHand.Hand.Sum(d => game.CheckNumberOfAces(d));
+           Int32 aces = PlayerHand.Hand.Count(d => d.Number == CardType.Ace);
            Int32 score = game.Turn.CurrentPlayer.Hand.Sum(c => game.GetValue(c, false, aces));
            if (score > 21)
            {

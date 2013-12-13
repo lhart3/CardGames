@@ -1,16 +1,14 @@
 ﻿@model CardGame.GameLogic.Blackjack
-
 @{
     Layout = "~/Views/shared/_Layout.cshtml";
  }
-
 @*@Html.ActionLink("Fold","playerFold")
 @Html.ActionLink("Hit", "playerHit")
 @Html.ActionLink("Stay", "playerStay")*@
 
 @section DealerCards {
     
-    @if (!Model.IsGameOver) {
+    @if (!Model.IsDealersTurn) {
         <td id = "dealersSecondCard" style="background-image: url('../../Images/FaceDownCard.jpg'); height:100px; width:70px">
         </td>
         foreach (var card in Model.DealerPlayer.Hand.Skip(1))
@@ -38,4 +36,3 @@
         </td>
     }
 }
-    

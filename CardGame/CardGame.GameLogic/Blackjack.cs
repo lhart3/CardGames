@@ -15,11 +15,12 @@ namespace CardGame.GameLogic
                 return Turn.Players.First(p => p.Player == dealer);
             }
         }
-
         private int score;
         private PlayerHand Dealerplayer;
         private bool doubleDown = true;
         int counter = 1;
+        public List<Player> WinnerList = new List<Player>();
+        public List<Player> Loserlist = new List<Player>();
         public Blackjack(Player[] players, Deck deck, BlackjackDealer dealer) : base(players, deck, dealer)
         {
 
@@ -33,7 +34,6 @@ namespace CardGame.GameLogic
         {
             if (card.Number == CardType.Ace)
             {
-                
                   if (IndexNumber == counter && !aceAsOne)
                   {
                        return 11;
@@ -57,28 +57,30 @@ namespace CardGame.GameLogic
                 return (int)card.Number;
             }
         }
-        public int CheckNumberOfAces(Card card)
-        {
-            int number = 0;
-            if (card.Number == CardType.Ace)
-            {
-                number++;
-            }
-            return number;
-        }
         public int Comparison(int player, int dealer)
         {
-            int result = player - dealer;
-            if (result < 1)
+            if (player > 21)
             {
                 return -1;
             }
-            else
+            else if (player < 22 && dealer > 21)
             {
                 return 1;
             }
+            else
+            {
+                int result = player - dealer;
+                if (result < 1)
+                {
+                    return -1;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
         }
-        public override Player TryCheckForWinner(PlayerHand player, out Player winner)
+        public override bool TryCheckForWinner(PlayerHand player)
         {
             int score2;
             int aces = 0;
@@ -88,7 +90,7 @@ namespace CardGame.GameLogic
                 if (dealerPlayer.Player.GetType() == typeof(BlackjackDealerPlayer))
                 {
                     Dealerplayer = dealerPlayer;
-                    aces = Dealerplayer.Hand.Sum(d => CheckNumberOfAces(d));
+                    aces = Dealerplayer.Hand.Count(d => d.Number == CardType.Ace);
                     score = Dealerplayer.Hand.Sum(d => GetValue(d, false, aces));
                     if (score > 21)
                     {
@@ -96,7 +98,7 @@ namespace CardGame.GameLogic
                     }
                 }
             }
-            aces2 = player.Hand.Sum(d => CheckNumberOfAces(d));
+            aces2 = player.Hand.Count(d => d.Number == CardType.Ace);
             score2 = player.Hand.Sum(d => GetValue(d, false, aces2));
             if (score2 > 21)
             {
@@ -104,18 +106,20 @@ namespace CardGame.GameLogic
             }
             if (Comparison(score2, score) == 1)
             {
-                winner = player.Player;
-                return winner;
+                WinnerList.Add(player.Player);
+                Loserlist.Add(Dealerplayer.Player);
+                return true;
             }
             else
             {
-                winner = Dealerplayer.Player;
-                return winner;
+                WinnerList.Add(Dealerplayer.Player);
+                Loserlist.Add(player.Player);
+                return false;
             }
         }
         public bool Bust(PlayerHand playerHand)
         {
-            Int32 aces = playerHand.Hand.Sum(d => CheckNumberOfAces(d));
+            Int32 aces = playerHand.Hand.Count(d => d.Number == CardType.Ace);
             Int32 score = playerHand.Hand.Sum(c => GetValue(c, false, aces));
             if (score > 21)
             {
@@ -133,7 +137,7 @@ namespace CardGame.GameLogic
         }
         public bool ComputerStand(PlayerHand dealerHand)
         {
-            Int32 aces = dealerHand.Hand.Sum(d => CheckNumberOfAces(d));
+            Int32 aces = dealerHand.Hand.Count(d => d.Number == CardType.Ace);
             Int32 score = dealerHand.Hand.Sum(c => GetValue(c, false, aces));
             if (score > 16)
             {
@@ -143,7 +147,7 @@ namespace CardGame.GameLogic
         }
         public bool ComputerSoftStand(PlayerHand dealerHand)
         {
-            Int32 aces = dealerHand.Hand.Sum(d => CheckNumberOfAces(d));
+            Int32 aces = dealerHand.Hand.Count(d => d.Number == CardType.Ace);
             Int32 score = dealerHand.Hand.Sum(c => GetValue(c, true, aces));
             if (score > 16)
             {
@@ -155,7 +159,7 @@ namespace CardGame.GameLogic
         {
             var SplittingPairs = playerhand.Hand.Select(c => (int)c.Number).OrderByDescending(v => v);
             HashSet<int> splittingPairs = new HashSet<int>(SplittingPairs);
-            Int32 aces = playerhand.Hand.Sum(d => CheckNumberOfAces(d));
+            Int32 aces = playerhand.Hand.Count(d => d.Number == CardType.Ace);
             Int32 score = playerhand.Hand.Sum(c => GetValue(c, true, aces));
             int splitpairs = score / 2;
             if (splittingPairs.Count < playerhand.Hand.Count)

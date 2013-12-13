@@ -11,6 +11,8 @@ namespace CardGame.GameLogic.Commands
         public virtual IEnumerable<IEvent> Process(Game game)
         {
             game.IsGameOver = false;
+            game.IsDealersTurn = false;
+            
             game.Turn = new Turn(game.Players);
 
             game.Discard.Clear();
@@ -19,6 +21,8 @@ namespace CardGame.GameLogic.Commands
             game.Dealer.DealStartingHand(game.Deck, game.Turn.Players);
 
             var blackjack = (Blackjack)game;
+            blackjack.Loserlist.Clear();
+            blackjack.WinnerList.Clear();
             return new[] { new RunComputerPlayerTurnEvent() { PlayerId = blackjack.DealerPlayer.Player.Id } };
         }
     }

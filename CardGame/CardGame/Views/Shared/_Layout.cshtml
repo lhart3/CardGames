@@ -27,32 +27,34 @@
 
                         <td style="width:600px;">
                         </td>
-
+                       
                         
                         @RenderSection("PlayerCards", false)
-
+                        @RenderSection("Winners", false)
                     </tr>
                 </table>
             </td>
         </tr>
         <tr>
             <td>
-                @using (Html.BeginForm("playerFold", "BlackJack")) {
+                @using (Html.BeginForm("playerFold", "BlackJack")) 
+                {
                     <input id="Fold" type="submit" value="Fold" />
                 }
-                @using (Html.BeginForm("playerHit", "BlackJack")) {
+                @using (Html.BeginForm("playerHit", "BlackJack")) 
+                {
                     <input id="Hit" type="submit" value="Hit" />
                 }
                 @using (Html.BeginForm("playerStay", "BlackJack"))
                 {
-                    <input id="Stay" type="submit" value="Stay" />
+                    <input id="Stay" type="submit" value="Stay"  />
                 }
                 @using (Html.BeginForm("NewBlackJackHand", "BlackJack"))
                 {
                     <input id="NewHand" type="submit" value= "New Hand" />
                 }
-                 @using (Html.BeginForm("playerDoubleDown", "BlackJack"))
-                 {
+                @using (Html.BeginForm("playerDoubleDown", "BlackJack"))
+                {
                     <input id="Doubledown" type="submit" value= "Double Down" />
                 }
                 @using (Html.BeginForm("playerBet", "BlackJack"))
@@ -64,67 +66,29 @@
             </td>
         </tr>
     </table>
-
     <script type="text/javascript">
-        function showPlayersImage()
+        function RestartHand()
         {
-            if (document.getElementById('playhit1').style.visibility != 'visible')
-            {
-                document.getElementById('playhit1').style.visibility = 'visible';
-                document.getElementById('Doubledown').style.visibility = 'hidden';
-            }
-            else if (document.getElementById('playhit2').style.visibility != 'visible')
-            {
-                document.getElementById('playhit2').style.visibility = 'visible';
-            }
-            else if (document.getElementById('playhit3').style.visibility != 'visible')
-            {
-                document.getElementById('playhit3').style.visibility = 'visible';
-            }
-            else if (document.getElementById('playhit4').style.visibility != 'visible')
-            {
-                document.getElementById('playhit4').style.visibility = 'visible';
-            }
-        }
-        function ResetPlayerImage()
-        {
-            document.getElementById('playhit1').style.visibility = 'hidden';
-            document.getElementById('playhit2').style.visibility = 'hidden';
-            document.getElementById('playhit3').style.visibility = 'hidden';
-            document.getElementById('playhit4').style.visibility = 'hidden';
-            document.getElementById('dealerhit1').style.visibility = 'hidden';
-            document.getElementById('dealerhit2').style.visibility = 'hidden';
-            document.getElementById('dealerhit3').style.visibility = 'hidden';
-            document.getElementById('dealerhit4').style.visibility = 'hidden';
+            document.getElementById('Hit').style.visibility = 'visible';
             document.getElementById('Doubledown').style.visibility = 'visible';
-            document.getElementById('dealersSecondCard').style.backgroundImage = 'url(../../Images/FaceDownCard.jpg)';
-        }
-        function showDealersImage()
-        {
-            if (document.getElementById == 'dealerhit1' && document.getElementById('dealerhit1').style.visibility != 'visible')
-            {
-                document.getElementById('dealerhit1').style.visibility = 'visible';
-            }
-            else if (document.getElementById == 'dealerhit2' && document.getElementById('dealerhit2').style.visibility != 'visible')
-            {
-                document.getElementById('dealerhit2').style.visibility = 'visible';
-            }
-            else if (document.getElementById == 'dealerhit3' && document.getElementById('dealerhit3').style.visibility != 'visible')
-            {
-                document.getElementById('dealerhit3').style.visibility = 'visible';
-            }
-            else if (document.getElementById == 'dealerhit4' && document.getElementById('dealerhit4').style.visibility != 'visible')
-            {
-                document.getElementById('dealerhit4').style.visibility = 'visible';
-            }
-        }
-        function showDealersSC()
-        {
-            document.getElementById('dealersSecondCard').style.backgroundImage = 'url(../../Images/FaceUpCard.jpg)';
+            document.getElementById('bet').style.visibility = 'visible';
+            document.getElementById('Stay').style.visibility = 'visible';
+            document.getElementById('Doubledown').style.visibility = 'visible';
         }
         function hideDoubleDown()
         {
             document.getElementById('Doubledown').style.visibility = 'hidden';
+        }
+        function hideAfterPass()
+        {
+            document.getElementById('Hit').style.visibility = 'hidden';
+            document.getElementById('Doubledown').style.visibility = 'hidden';
+            document.getElementById('bet').style.visibility = 'hidden';
+            document.getElementById('Stay').style.visibility = 'hidden';
+        }
+        function hideBet()
+        {
+            document.getElementById('bet').style.visibility = 'hidden';
         }
     </script>
 </div>

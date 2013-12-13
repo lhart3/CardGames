@@ -13,6 +13,7 @@ namespace CardGame.GameLogic
         public Player(Guid id)
         {
             Id = id;
+            Currency = 5000;
         }
 
         public bool Equals(Player other)

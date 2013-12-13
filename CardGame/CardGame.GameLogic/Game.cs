@@ -20,6 +20,8 @@ namespace CardGame.GameLogic
 
         public bool IsGameOver { get; set; }
 
+        public bool IsDealersTurn { get; set; }
+
         public int currentRound;
 
         public Game(Player[] players, Deck deck, Dealer dealer)
@@ -32,7 +34,7 @@ namespace CardGame.GameLogic
             Turn = new Turn(players);
         }
 
-        public abstract Player TryCheckForWinner(PlayerHand player, out Player winner);
+        public abstract bool TryCheckForWinner(PlayerHand player);
 
         public void AddPlayer(Player player)
         {

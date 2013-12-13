@@ -16,6 +16,7 @@ namespace CardGame.Controllers
 
         public BlackJackController()
         {
+
         }
 
         public ActionResult CreateGame()
