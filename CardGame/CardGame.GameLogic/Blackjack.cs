@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using CardGame.GameLogic.Events;
+using CardGame.GameLogic.Commands;
+using CardGame;
 
 namespace CardGame.GameLogic
 {
@@ -15,13 +18,24 @@ namespace CardGame.GameLogic
                 return Turn.Players.First(p => p.Player == dealer);
             }
         }
+        public PlayerHand Player
+        {
+            get
+            {
+                var player = Players.First(p => p is Player);
+                return Turn.Players.First(p => p.Player == player);
+            }
+        }
+        public List<IEvent> _events;
         private int score;
         private PlayerHand Dealerplayer;
         private bool doubleDown = true;
         int counter = 1;
         public List<Player> WinnerList = new List<Player>();
         public List<Player> Loserlist = new List<Player>();
-        public Blackjack(Player[] players, Deck deck, BlackjackDealer dealer) : base(players, deck, dealer)
+        public Game game;
+        public Blackjack(Player[] players, Deck deck, BlackjackDealer dealer)
+            : base(players, deck, dealer)
         {
 
         }
@@ -34,19 +48,19 @@ namespace CardGame.GameLogic
         {
             if (card.Number == CardType.Ace)
             {
-                  if (IndexNumber == counter && !aceAsOne)
-                  {
-                       return 11;
-                  }
-                  else if (IndexNumber == counter && aceAsOne)
-                  {
-                       return 1;
-                  }
-                  else
-                  {
-                       counter++;
-                       return 1;
-                  }
+                if (IndexNumber == counter && !aceAsOne)
+                {
+                    return 11;
+                }
+                else if (IndexNumber == counter && aceAsOne)
+                {
+                    return 1;
+                }
+                else
+                {
+                    counter++;
+                    return 1;
+                }
             }
             if ((int)card.Number > 10)
             {
@@ -170,10 +184,14 @@ namespace CardGame.GameLogic
         }
         public bool DoublingDown(PlayerHand playerhand)
         {
-            if (playerhand.Hand.Count() == 2 && doubleDown == false)
+            if (playerhand.Hand.Count() == 2 && doubleDown == true)
             {
-                playerhand.HighBid = playerhand.HighBid * 2;
-                doubleDown = true;
+                var evt = new RaiseBidEvent(playerhand.Player.Id, playerhand.HighBid);
+                var eventProcessor = new EventProcessor();
+                var commandProcessor = new CommandProcessor();
+                _events.Add(evt);
+                eventProcessor.ProcessEvents(_events, game, true);
+                doubleDown = false;
                 return true;
             }
             doubleDown = false;
