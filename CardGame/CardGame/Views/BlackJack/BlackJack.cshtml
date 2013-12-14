@@ -6,9 +6,10 @@
 @Html.ActionLink("Hit", "playerHit")
 @Html.ActionLink("Stay", "playerStay")*@
 
-@section DealerCards {
-    
-    @if (!Model.IsDealersTurn) {
+@section DealerCards 
+{
+    @if (!Model.IsDealersTurn) 
+    {
         <td id = "dealersSecondCard" style="background-image: url('../../Images/FaceDownCard.jpg'); height:100px; width:70px">
         </td>
         foreach (var card in Model.DealerPlayer.Hand.Skip(1))
@@ -17,7 +18,9 @@
                 <span>@card.Number</span><span>@card.Suit</span>
             </td>
         }
-    } else {
+    } 
+    else 
+    {
         foreach (var card in Model.DealerPlayer.Hand)
         {
             <td style="background-image: url('../../Images/FaceUpCard.jpg'); height:100px; width:70px">   
@@ -26,17 +29,26 @@
         }   
     }
 }
-
-@section RemainingBalance{
-    <p>Remaining Balance: @CardGame.GameLogic.Player.Currency</p>
-}
-
-@section PlayerCards {
-
+@section PlayerCards 
+{
     @foreach (var card in Model.Turn.Players.First(p => p != Model.DealerPlayer).Hand)
     {
         <td style="background-image: url('../../Images/FaceUpCard.jpg'); height:100px; width:70px">   
             <span>@card.Number</span><span>@card.Suit</span>
         </td>
     }
+}
+@section DealerCurrent
+{
+    <td style="background-image: url('../../Images/FaceUpCard.jpg'); height:60px; width:60px">
+            >>>>>>> Betting/System For Dealer   
+            <span>@Model.DealerPlayer.Player.Currency</span>
+    </td>
+}
+@section PlayerCurrent
+{
+    <td style="background-image: url('../../Images/FaceUpCard.jpg'); height:50px; width:50px">
+            >>>>>>> Betting/System For Player   
+            <span>@Model.Player.Player.Currency</span>
+    </td>
 }
